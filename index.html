@@ -6,7 +6,7 @@
 		<div>
 			<div>1、字符串截取，mysql从1开始</div>
 			<div>2、DECODE,用if或case when替代<br>
-				<textarea>--原sql
+				<div>--原sql
 					update MAT_WH_OUTDETAIL d
 					set d.price=round(decode(d.qty,0,0,d.cost/d.qty),6)
 					WHERE D.OUT_ID = ?
@@ -26,10 +26,10 @@
 					end
 					)
 					,6)
-					WHERE D.OUT_ID = '4028ee8571f252940171f2f189ba0024'</textarea>
+					WHERE D.OUT_ID = '4028ee8571f252940171f2f189ba0024'</div>
 			</div>
 			<div>3、TO_CHAR<br>
-				<textarea>
+				<div>
 					----oracle原SQL
 SELECT ID,
 	 BUSI_CODE,
@@ -65,10 +65,10 @@ select
   replace(format(c.check_amount,2), ',', '')
 from
   pj_contract_info c
-				</textarea>
+				</div>
 			</div>
 			<div>4、to_date，STR_TO_DATE<br>
-				<textarea>--oracle原来的SQL
+				<div>--oracle原来的SQL
 select
   TO_DATE((SELECT C.CODE FROM MAT_SYS_CONF C WHERE C.TYPE='MAT_MON_DATE'),'YYYY-MM-DD')
 from
@@ -76,10 +76,10 @@ from
 --mysql用STR_TO_DATE替换后的SQL
 select
   STR_TO_DATE((SELECT C.CODE FROM MAT_SYS_CONF C WHERE C.TYPE='MAT_MON_DATE'), '%Y-%m-%d')
-</textarea>
+</div>
 			</div>
 			<div>5、取整或截断，trunc<br>
-				<textarea>---oracle原SQL
+				<div>---oracle原SQL
 select
 *
 from
@@ -92,7 +92,7 @@ select
 from
 mat_pur_offset o
 where
-cast(o.busi_time as date) > STR_TO_DATE('2020-07-06', '%Y-%m-%d')</textarea>
+cast(o.busi_time as date) > STR_TO_DATE('2020-07-06', '%Y-%m-%d')</div>
 			</div>
 			<div>6、字符串拼接,concat(),无限链接</div>
 			<div>7、字符串拼接,concat(),无限链接</div>
