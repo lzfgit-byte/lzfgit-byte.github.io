@@ -1,8 +1,129 @@
 <html>
-<head>
-  <title>测试</title>
-</head>
-<body>
-<h1>这是个测试用例</h1>
-</body>
+	<title>修改自动编译</title>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<body>
+		<input placeholder="请输入sql语句" id="inSql">
+		<div>
+			<div>1、字符串截取，mysql从1开始</div>
+			<div>2、DECODE,用if或case when替代<br>
+				<textarea>--原sql
+					update MAT_WH_OUTDETAIL d
+					set d.price=round(decode(d.qty,0,0,d.cost/d.qty),6)
+					WHERE D.OUT_ID = ?
+
+					--  if 的改法
+					update MAT_WH_OUTDETAIL d
+					set d.price = round(if(d.qty=0,0,d.cost/d.qty),6)
+					WHERE D.OUT_ID = '4028ee8571f252940171f2f189ba0024'
+
+					-----case when 的改法
+					update MAT_WH_OUTDETAIL d
+					set d.price = round(
+					(case d.qty
+					when 0 then 1
+					--when 1 then 1
+					else d.cost/d.qty
+					end
+					)
+					,6)
+					WHERE D.OUT_ID = '4028ee8571f252940171f2f189ba0024'</textarea>
+			</div>
+			<div>3、TO_CHAR<br>
+				<textarea>
+					----oracle原SQL
+SELECT ID,
+	 BUSI_CODE,
+	 to_char(BUSI_TIME,'yyyy-MM-dd') BUSI_TIME,
+	 TYPE
+FROM MAT_SALES_SALE --领料出库单
+
+
+-------------   %Y	年，4 位
+-------------   %y	年，2 位
+-------------   %m  月，数值(00-12)
+-------------   %d	月的天，数值(00-31)
+-------------   %e	月的天，数值(0-31)
+
+-----mysql用date_format格式化的SQL
+SELECT ID,
+	 BUSI_CODE,
+	 date_format(BUSI_TIME,'%Y-%m-%d') BUSI_TIME,
+	 TYPE
+FROM MAT_SALES_SALE --领料出库单
+
+=================================================================================
+
+----oracle原SQL
+selectTO_CHAR
+  to_char(c.check_amount,'fm99999999990.00')
+from
+  pj_contract_info c
+
+----mysql用replace和format格式化后的SQL
+select
+  id,
+  replace(format(c.check_amount,2), ',', '')
+from
+  pj_contract_info c
+				</textarea>
+			</div>
+			<div>4、to_date，STR_TO_DATE<br>
+				<textarea>--oracle原来的SQL
+select
+  TO_DATE((SELECT C.CODE FROM MAT_SYS_CONF C WHERE C.TYPE='MAT_MON_DATE'),'YYYY-MM-DD')
+from
+  dual
+--mysql用STR_TO_DATE替换后的SQL
+select
+  STR_TO_DATE((SELECT C.CODE FROM MAT_SYS_CONF C WHERE C.TYPE='MAT_MON_DATE'), '%Y-%m-%d')
+</textarea>
+			</div>
+			<div>5、取整或截断，trunc<br>
+				<textarea>---oracle原SQL
+select
+*
+from
+mat_pur_offset o
+where
+trunc(o.busi_time) > to_date('2020-07-06', 'yyyy-mm-dd')
+					---mysql用cast修改后的SQL
+select
+*
+from
+mat_pur_offset o
+where
+cast(o.busi_time as date) > STR_TO_DATE('2020-07-06', '%Y-%m-%d')</textarea>
+			</div>
+			<div>6、字符串拼接,concat(),无限链接</div>
+			<div>7、字符串拼接,concat(),无限链接</div>
+		</div>
+
+	</body>
+
 </html>
+<script>
+	$("#idSql").blur(function () {
+		var olSql = $(this).val();
+		olSql = olSql.toUpperCase();
+		while(olSql.indexOf("SUBSTR") > 0){
+			olSql = olSql.replace("SUBSTR","substring");
+		}
+		while (olSql.indexOf("LENGTH") > -1){
+			olSql = olSql.replace("LENGTH","char_length");
+		}
+		while (olSql.indexOf("NVL") > -1){
+			olSql = olSql.replace("NVL","ifnull");
+		}
+		while (olSql.indexOf("TRUNC") > -1){
+			olSql = olSql.replace("TRUNC","cast");
+		}
+		while (olSql.indexOf("SYSDATE") > -1){
+			olSql = olSql.replace("SYSDATE","SYSDATE()");
+		}
+		while (olSql.indexOf("SYSDATE") > -1){
+			olSql = olSql.replace("SYSDATE","SYSDATE()");
+		}
+
+
+	})
+</script>
