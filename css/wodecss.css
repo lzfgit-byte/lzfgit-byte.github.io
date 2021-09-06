@@ -235,7 +235,7 @@ label:focus {
     -moz-box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
     -webkit-box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
     box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
-    background-image: url('../images/u6.png');
+
     background-repeat: no-repeat;
     padding-left: 30px;
     background-position: 10px;
