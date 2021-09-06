@@ -11,7 +11,7 @@ a, a:hover, a:focus {
 }
 
 body {
-    background: #EFEFEF;
+    /*background: #EFEFEF;*/
     font: 14px/100% arial, \5b8b\4f53;
     font-family: "Microsoft YaHei", Helvetica, Verdana, sans-serif;
     padding-bottom: 250px;
