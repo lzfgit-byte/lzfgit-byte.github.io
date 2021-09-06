@@ -159,7 +159,8 @@ body {
 }
 
 .singleLink > .img-links2 {
-    max-height: 52px;
+    width: 52px;
+    height: 52px;
 }
 
 .text-links {
