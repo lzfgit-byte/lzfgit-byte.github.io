@@ -10,7 +10,14 @@ let data = {
 
 
     ],
-    searchUrl:"https://www.google.com/search?q="
+    websH:[
+        {href:"https://thehentaiworld.com/",name:"hword"},
+        {href:"https://rule34video.com/",name:"rule34"}
+        ,{href:"https://18comic.vip/",name:"禁漫天堂"}
+        ,{href:"https://pornhub.com/",name:"pornhub"}
+        ,{href:"https://www.xvideos.com/",name:"xvideos"}
+    ]
+    ,searchUrl:"https://www.google.com/search?q="
 }
 
 

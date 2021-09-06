@@ -7,6 +7,11 @@ let indexObj = {
             let $this = $(this);
             if (event.code == "Enter") {
                 let url = $this.val();
+                if(url == "phpla"){
+                    data.webs = data.websH;
+                    indexObj.initData()
+                    return
+                }
                 let reg = new RegExp("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
                 if (reg.test(url)){
                     window.open(url, "_blank")
