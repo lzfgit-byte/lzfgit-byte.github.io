@@ -55,31 +55,26 @@ body {
 
 .search {
     height: 175px;
-    margin: 35px auto 0;
+    margin: 128px auto 0;
 }
 
 .logo-box {
-    width: 100px;
-    height: 100px;
-    margin: 0 0 10px 45%;
+    width: 293px;
+    height: 99px;
 }
 
 .header_img {
     width: 100%;
     height: 100%;
-    background-image: url("../images/logo5.png");
+    background-image: url("../images/google_logo.svg");
     background-position: center;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     background-size: 100%;
-    transition: background-size 1.5s;
-    transition: transform 0.4s cubic-bezier(0.71, 0.01, 0.25, 0.99); /*变化时间设置为0.4秒(变化动作即为下面的图像旋转360读）*/
+    /*transition: background-size 1.5s;*/
+    /*transition: transform 0.4s cubic-bezier(0.71, 0.01, 0.25, 0.99); !*变化时间设置为0.4秒(变化动作即为下面的图像旋转360读）*!*/
 }
 
-.header_img:hover {
-    transform: rotateZ(360deg);
-    -webkit-transform: rotateZ(360deg);
-    -moz-transform: rotateZ(360deg);
-}
+
 
 .header_wrap.active {
     transform: rotateY(360deg);
@@ -183,21 +178,6 @@ ul.recommonds.shake-rotate.sortable .singleLink {
 }
 
 /* index style */
-.input2 {
-    position: relative;
-    width: 430px;
-    height: 30px;
-    transition-duration: 0.2s;
-    -moz-transition-duration: 0.2s;
-    -webkit-transition-duration: 0.2s;
-    -o-transition-duration: 0.2s;
-    padding: 5px 5px 5px 10px;
-    background-color: #DEDEDE;
-    border-radius: 0px;
-    outline: none;
-    margin-left: -4px;
-    border: none;
-}
 
 input:focus {
     background-color: #FFF;
@@ -220,8 +200,8 @@ label:focus {
 }
 
 .header_wrap {
-    width: 100px;
-    height: 100px;
+    width: 271px;
+    height: 92px;
     margin: 0 auto;
     border-radius: 50%;
     cursor: default;
@@ -229,18 +209,40 @@ label:focus {
     transition: all .5s ease
 }
 
-#b-word {
-    color: #6B6B6B;
-    width: 346px;
-    -moz-box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
-    -webkit-box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
-    box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
-
-    background-repeat: no-repeat;
-    padding-left: 30px;
-    background-position: 10px;
-    background-color: rgba(222, 222, 222, 0.85) !important;
+#search2 {
+    width: 440px;
+    height: 40px;
+    border:none;    /*取消默认的边框以设置自定义边框*/
+    outline:none;   /*取消浏览器默认的蓝光边框以设置自定义的输入框*/
+    font-size: 16px;
+    color: rgb(112, 112, 112);
+    margin-left: 10px;
+    border-image-width: 0px;
+    -webkit-box-shadow: none;
 }
+.searchbar {        /*目的是设置自定义边框，比如圆角与阴影*/
+    border: rgb(218, 218, 218) solid 0px;
+    border-radius: 2em;
+    width: 552px;
+    height: 42px;
+    box-shadow: 0px 0px 5px rgb(212, 212, 212);
+    margin: 0 auto;
+}
+
+.mcp {
+    height: 35px;
+}
+
+.mg {
+    height: 25px;
+    margin-left: 5px;
+}
+#search2, .mcp, .mg {
+    vertical-align: middle;
+}
+
+
+
 
 #q-btn, #b-btn {
     opacity: .85;
@@ -533,11 +535,7 @@ body.night-mode {
     box-shadow: inset 1px 1px 4px #000
 }
 
-.night-mode .header_img {
-    background-image: url("../images/logo5_yejian.png");
-}
 
-/*.night-mode .header_img {  -webkit-filter: grayscale(100%);  -moz-filter: grayscale(100%);  -ms-filter: grayscale(100%);  -o-filter: grayscale(100%);  filter: grayscale(100%);  filter: gray;}.night-mode .header_img:hover{ background-color: rgb(189, 189, 189); }*/
 .night-mode #zanzhu1 {
     color: #FBFBFB;
 }
@@ -604,11 +602,7 @@ body.night-mode {
         background-size: 100% auto
     }
 
-    .logo-box {
-        width: auto;
-        height: auto;
-        margin: .1rem auto 0;
-    }
+
 
     .framework {
         width: 100%;

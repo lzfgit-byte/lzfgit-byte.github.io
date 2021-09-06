@@ -1,83 +1,47 @@
 <!doctype html>
 <html class="">
- <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-  <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
-  <title>小兄弟</title> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
- 
-  <link id="bs-css" href="./css/bootstrap.paper.min.css" data-href="./Public/damalu/css/bootstrap.paper.min.css" rel="stylesheet" type="text/css"> 
-  <link id="ng-css" data-href="./Public/damalu/css/bootstrap.cyborg.min.css" rel="stylesheet" type="text/css"> 
-  <link href="./css/wodecss.css" rel="stylesheet" type="text/css"> 
-  <script type="text/javascript" src="js/jquery.min.js"></script> 
-  <script src="js/html.sortable.min.js"></script> 
-  <script src="js/bootstrap.min.js"></script> 
-  <script>var user_data = null;</script> 
- </head> 
- <body> 
-  <!--搜索栏--> 
-  <div class="framework"> 
-   <div class="top-section"> 
-    <div class="useful-links"> 
-     <div id="search" class="search"> 
-      <div class="logo-box"> 
-       <a class="header_wrap" href="javascript:void(0)"> 
-        <div id="header-box" class="header_img"></div> </a> 
-      </div> 
-      <div class="search-wrapper"> 
-       <form id="search-form" action="//www.baidu.com/baidu" target="_blank"> 
-        <input id="q-btn" type="submit"  value="谷歌搜索" class="button2">
-        <input name="q" type="hidden" id="q-word"> 
-        <input type="text" id="b-word" size="40" class="input2">
-        <input type="submit" id="b-btn" value="百度搜索" class="button button-hook"> 
-       </form> 
-      </div> 
-     </div> ﻿ 
-     <ul class="recommonds" id="dataContains">
-     </ul>
-     <!-- 模板内容 --> 
-     <div class="hide" id="tpl-box"> 
-      <li data_add="0" class="item sigleRecommond"> <span add_del="0" class="del-flag glyphicon glyphicon-remove"></span> <a class="singleLink" href="" title="" target="_blank"> <span class="icon-box"></span> <span class="text-links"></span> </a> </li> 
-     </div> 
-    </div> 
-   </div> 
-  </div> 
-  <!-- Modal --> 
-  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> 
-   <div class="modal-dialog" role="document"> 
-    <div class="modal-content"> 
-     <div class="modal-header"> 
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> 
-      <h4 class="modal-title" id="editModalLabel">添加/编辑 导航</h4> 
-     </div> 
-     <div class="modal-body"> 
-      <form id="form-add"> 
-       <div class="form-group"> 
-        <label for="web_url">网站地址</label> 
-        <input type="text" class="form-control" id="web_url" placeholder="//dama.lu"> 
-       </div> 
-       <div class="form-group"> 
-        <label for="web_name">网站名称</label> 
-        <input type="text" class="form-control" id="web_name" placeholder="大马路"> 
-       </div> 
-       <div class="form-group"> 
-        <label for="web_name2">简称</label> 
-        <input type="text" class="form-control" id="web_name2" placeholder="导航（建议两个字中文或者四个大小写英文）"> 
-       </div> 
-       <div class="form-group"> 
-        <label for="web_color">背景颜色 <span class="show-color" style="background-color: #2a78dc; box-shadow: 0px 3px 10px rgba(42, 120, 220, 0.15);"></span></label> 
-        <select class="form-control" id="web_color"> 
-         <option value="42, 120, 220">蓝</option> <option value="205, 202, 200">灰</option> <option value="255, 223, 128">黄</option> <option value="134, 181, 124">绿</option> <option value="252, 67, 0">橘</option> <option value="32, 184, 173">青</option> <option value="200, 24, 27">红</option> <option value="136, 72, 152">紫</option> </select>
-       </div> 
-       <button type="submit" id="save-btn" class="btn btn-success">提交</button> 
-      </form> 
-     </div> 
-     <div class="modal-footer hide"> 
-      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
-     </div> 
-    </div> 
-   </div> 
-  </div>
-  <script type="module" src="js/index.js"></script>
- </body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+    <title>小兄弟</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link id="bs-css" href="./css/bootstrap.paper.min.css" data-href="./Public/damalu/css/bootstrap.paper.min.css"
+          rel="stylesheet" type="text/css">
+    <link id="ng-css" data-href="./Public/damalu/css/bootstrap.cyborg.min.css" rel="stylesheet" type="text/css">
+    <link href="./css/wodecss.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/html.sortable.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>var user_data = null;</script>
+</head>
+<body>
+<!--搜索栏-->
+<div class="framework">
+    <div class="top-section">
+        <div class="useful-links">
+            <div id="search" class="search" align="center">
+                <div class="logo-box" align="center">
+                    <div id="header-box" class="header_img"></div>
+                </div>
+                <div class="search-wrapper">
+                    <div class="searchbar">
+                        <img src="./images/search.svg" class="mg">
+                        <input type="text" id="search2" value="Search Google or type a URL"
+                               onfocus="if(value=='Search Google or type a URL')value=''"
+                               onblur="if(!value)value='Search Google or type a URL'"
+                               name="keyword">
+                    </div>
+                </div>
+            </div>
+            ﻿
+            <ul class="recommonds" id="dataContains">
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script type="module" src="js/index.js"></script>
+</body>
 </html>
