@@ -17,7 +17,7 @@ let data = {
         ,{href:"https://pornhub.com/",name:"pornhub"}
         ,{href:"https://www.xvideos.com/",name:"xvideos"}
     ]
-    ,searchUrl:"https://www.google.com/search?q="
+    ,searchUrl:{'google':"https://www.google.com/search?q=","baidu":"https://www.baidu.com/s?wd=","duck":"https://duckduckgo.com/?q="}
 }
 
 

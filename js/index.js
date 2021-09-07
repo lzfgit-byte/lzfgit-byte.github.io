@@ -3,7 +3,7 @@ import {data} from '../data.js'
 let indexObj = {
     bind:function () {
 
-        $('#search2').on("keydown",function () {
+        $('#search2').off().on("keydown",function () {
             let $this = $(this);
             if (event.code == "Enter") {
                 let url = $this.val();
@@ -13,14 +13,37 @@ let indexObj = {
                     return
                 }
                 let reg = new RegExp("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
+                let searchUrl = data.searchUrl['google'];
                 if (reg.test(url)){
                     window.open(url, "_blank")
                 }else {
-                    window.open(data.searchUrl + url, "_blank")
+                    if(url.startsWith("$baidu")){
+                        searchUrl = data.searchUrl['baidu'];
+                        url = url.substring(7)
+                        window.open(searchUrl + url, "_blank")
+                        $this.val("");
+                        return;
+                    }
+                    if(url.startsWith("$duck")){
+                        searchUrl = data.searchUrl['duck'];
+                        url = url.substring(6)
+                        window.open(searchUrl + url, "_blank")
+                        $this.val("");
+                        return;
+                    }
+                    window.open(searchUrl + url, "_blank")
                 }
                 $this.val("");
             }
 
+        }).on("dblclick",function () {
+            let $this = $(this);
+            $this.val("$baidu ");
+        }).on("contextmenu",function () {
+            event.preventDefault();
+            event.stopPropagation();
+            let $this = $(this);
+            $this.val("$duck ");
         })
     }
     ,initData:function () {
