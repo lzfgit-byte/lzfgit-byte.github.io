@@ -57,14 +57,14 @@ let indexObj = {
                 }
 
                 let temp = `<li data_old="1" class="sigleRecommond"> <span old_del="${++count}" class="del-flag glyphicon glyphicon-remove"></span> 
-                 <a class="singleLink" href="${value.href}" title="" target="_blank"> <img class="img-links2" src="${value.src}" 
+                 <a class="singleLink animate__animated animate__backInRight" href="${value.href}" title="" target="_blank"> <img class="img-links2" src="${value.src}" 
                 style="box-shadow: 0 10px 10px -6px #3c3737bf;border-radius: 50%;padding: 10% 10% 10% 10%"> <span class="text-links">${value.name}</span> </a> </li>`;
                 html += temp
             }
         })
         for(let i = count;i<50;i++){
             let temp = `<li data_old="1" class="sigleRecommond"> <span old_del="${i}" class="del-flag glyphicon glyphicon-remove"></span> 
-                 <a class="singleLink" href="#" title="" target="_blank"> <img class="img-links2"  
+                 <a class="singleLink animate__animated animate__backInRight" href="#" title="" target="_blank"> <img class="img-links2"  
                 style="box-shadow: 0 10px 10px -6px #3c3737bf;border-radius: 50%;padding: 10% 10% 10% 10%"> <span class="text-links">待定</span> </a> </li>`;
             html += temp
         }
