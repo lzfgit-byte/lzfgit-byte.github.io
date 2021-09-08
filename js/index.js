@@ -47,6 +47,8 @@ let indexObj = {
         })
     }
     ,initData:function () {
+        let $this = $("#dataContains");
+        $this.hide();
         let webs = data.webs;
         let html = "";
         let count = 0;
@@ -68,7 +70,8 @@ let indexObj = {
                 style="box-shadow: 0 10px 10px -6px #3c3737bf;border-radius: 50%;padding: 10% 10% 10% 10%"> <span class="text-links">待定</span> </a> </li>`;
             html += temp
         }
-        $("#dataContains").html(html);
+        $this.html(html);
+        $this.show();
     }
     ,init:function () {
         this.bind()
