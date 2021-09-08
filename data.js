@@ -7,6 +7,14 @@ let data = {
         ,{href:"https://tool.chinaz.com/tools/imgtobase",src:`${imgData['ZZGJ']}`,name:"站长工具"}
         ,{href:"https://v4speed.com/#/login",name:"v4speed"}
         ,{href:"https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox",src:`${imgData['gmail']}`,name:"Gmail"}
+        ,{href:"https://outlook.live.com/mail/0/inbox",src:`${imgData['outlook']}`,name:"Outlook"}
+        ,{href:"https://mega.nz/folder/6wxFGQ6B#KkTVZbNNJDLyDesnBtE4Bw",src:`${imgData['dulelink']}`,name:"dulelink"}
+        ,{href:"https://www.yikm.net/",src:`${imgData['fc']}`,name:"fc"}
+        ,{href:"https://www.manhuacat.com/",src:`${imgData['mhm']}`,name:"漫画猫"}
+        ,{href:"https://switchtools.sshnuke.net/",src:`${imgData['dbt']}`,name:"toolsForSw"}
+        ,{href:"https://darthsternie.net/switch-firmwares/",src:`${imgData['swf']}`,name:"swFirm"}
+        ,{href:"http://gbtgame.ys168.com/",src:`${imgData['gbt']}`,name:"GBT"}
+        ,{href:"https://www.google.com/sky/",src:`${imgData['goosky']}`,name:"GoogleSky"}
 
 
     ],
