@@ -28,7 +28,7 @@ let data = {
         ,{href:"https://18comic.vip/",name:"禁漫天堂",domain:"18comic.vip"}
         ,{href:"https://pornhub.com/",name:"pornhub",domain: "pornhub.com"}
         ,{href:"https://www.xvideos.com/",name:"xvideos",domain: "xvideos.com"}
-        ,{href:"https://www.whichav.video/",name:"xvideos",domain: "whichav.video"}
+        ,{href:"https://www.whichav.video/",name:"导航",domain: "whichav.video"}
     ]
     ,searchUrl:{'google':"https://www.google.com/search?q=","baidu":"https://www.baidu.com/s?wd=","duck":"https://duckduckgo.com/?q="}
 }
