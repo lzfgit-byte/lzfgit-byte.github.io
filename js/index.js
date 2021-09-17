@@ -7,7 +7,7 @@ let indexObj = {
             let $this = $(this);
             if (event.code == "Enter") {
                 let url = $this.val();
-                if(url == "phpla"){
+                if(url == "1807"){
                     data.webs = data.websH;
                     indexObj.initData()
                     return
@@ -57,7 +57,9 @@ let indexObj = {
                 if(value.src == undefined){
                     value.src = data.defaultImg;
                 }
-
+                if(value.domain){
+                    value.src = data.defaulticon + value.domain;
+                }
                 let temp = `<li data_old="1" class="sigleRecommond"> <span old_del="${++count}" class="del-flag glyphicon glyphicon-remove"></span> 
                  <a class="singleLink animate__animated animate__backInRight" href="${value.href}" title="" target="_blank"> <img class="img-links2" src="${value.src}" 
                 style="box-shadow: 0 10px 10px -6px #3c3737bf;border-radius: 50%;padding: 10% 10% 10% 10%"> <span class="text-links">${value.name}</span> </a> </li>`;

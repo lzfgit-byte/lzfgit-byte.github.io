@@ -1,8 +1,9 @@
 import {imgData} from './imgData.js'
 let data = {
     defaultImg:`${imgData.default}`,
+    defaulticon:`https://www.google.com/s2/favicons?domain=`,
     webs:[
-        {href:"https://www.163.com/",src:`${imgData['hx']}`,name:"网易",show:false},
+        {href:"https://www.163.com/",src:`${imgData['hx']}`,name:"网易",show:false,domain:"163.com"},
         {href:"https://v2hx.github.io/",src:`${imgData['hx']}`,name:"红杏"}
         ,{href:"https://tool.chinaz.com/tools/imgtobase",src:`${imgData['ZZGJ']}`,name:"站长工具"}
         ,{href:"https://v4speed.com/#/login",name:"v4speed"}
@@ -22,11 +23,12 @@ let data = {
 
     ],
     websH:[
-        {href:"https://thehentaiworld.com/",name:"hword"},
-        {href:"https://rule34video.com/",name:"rule34"}
-        ,{href:"https://18comic.vip/",name:"禁漫天堂"}
-        ,{href:"https://pornhub.com/",name:"pornhub"}
-        ,{href:"https://www.xvideos.com/",name:"xvideos"}
+        {href:"https://thehentaiworld.com/",name:"hword",domain:"thehentaiworld.com"},
+        {href:"https://rule34video.com/",name:"rule34",domain:"rule34video.com"}
+        ,{href:"https://18comic.vip/",name:"禁漫天堂",domain:"18comic.vip"}
+        ,{href:"https://pornhub.com/",name:"pornhub",domain: "pornhub.com"}
+        ,{href:"https://www.xvideos.com/",name:"xvideos",domain: "xvideos.com"}
+        ,{href:"https://www.whichav.video/",name:"xvideos",domain: "whichav.video"}
     ]
     ,searchUrl:{'google':"https://www.google.com/search?q=","baidu":"https://www.baidu.com/s?wd=","duck":"https://duckduckgo.com/?q="}
 }
