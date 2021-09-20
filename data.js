@@ -19,6 +19,7 @@ let data = {
         ,{href:"https://www.dandanzan.cc/",src:`${imgData['ddz']}`,name:"蛋蛋赞"}
         ,{href:"http://www.8hyyw.com/",src:`${imgData['8h']}`,name:"8号影院"}
         ,{href:"https://www.o8tv.com/",src:`${imgData['555']}`,name:"555影院"}
+        ,{href:"http://www.tvyan.com/",name:"555影院",domain:"tvyan.com"}
 
 
     ],
