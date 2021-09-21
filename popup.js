@@ -2,7 +2,8 @@
 //   "newtab": "index.html"
 // },
 let changeColor = document.getElementById("changeColor");
-
+let form = layui.form;
+form.render()
 chrome.storage.sync.get("color", ({ color }) => {
 
   changeColor.style.backgroundColor = color;
@@ -11,7 +12,7 @@ chrome.storage.sync.get("color", ({ color }) => {
 // When the button is clicked, inject setPageBackgroundColor into current page
 changeColor.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  debugger
+
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: setPageBackgroundColor,
@@ -23,9 +24,9 @@ changeColor.addEventListener("click", async () => {
 function setPageBackgroundColor() {
   chrome.storage.sync.get("color", ({ color }) => {
     // document.body.style.backgroundColor = color;
-    debugger
-    alert(color)
+
     localStorage.setItem("6666",color);
+
 
   });
 }

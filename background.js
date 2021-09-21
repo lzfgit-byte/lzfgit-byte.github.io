@@ -12,6 +12,10 @@ chrome.runtime.onInstalled.addListener(() => {
 // chrome.bookmarks.onCreated.addListener(() => {
 //   // do something
 // });
-function getUrl() {
-
-}
+chrome.action.onClicked.addListener((tab) => {
+  alert('sds')
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ['layui/layui.js','js/util.js']
+  });
+});
