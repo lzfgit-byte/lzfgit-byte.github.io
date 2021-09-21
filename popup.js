@@ -3,7 +3,7 @@
 // },
 let changeColor = document.getElementById("changeColor");
 let form = layui.form;
-form.render()
+
 chrome.storage.sync.get("color", ({ color }) => {
 
   changeColor.style.backgroundColor = color;
