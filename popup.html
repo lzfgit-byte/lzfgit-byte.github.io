@@ -1,20 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
   <head>
-
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/popup.css">
     <link rel="stylesheet" href="layui/css/layui.css">
     <script src="layui/layui.js"></script>
     <script src="js/util.js"></script>
+    <title>123</title>
   </head>
-  <body>
-    <div style="width: 300px;height: 600px">
+  <body style="width: 300px;height: 600px">
+    <div class="layui-container container">
+      <p>网页数据</p>
+      <hr>
+      <div class="layui-row">
+         <input class="layui-input" title="异步同步的key" id="asyncKey" placeholder="异步同步的key"/>
+      </div>
+      <div class="layui-row">
+        <div class="layui-col-md3 ">
+          <!--          将同步数据设置到网站的localstage中-->
+          <button id="setThisWeb" class="layui-btn">设置网页stage</button>
+        </div>
+        <div class="layui-col-md3">
+          <!--          将localstage同步到同步数据设置到网站的-->
+          <button id="saveThisWeb" class="layui-btn">保存网页stage</button>
+        </div>
+      </div>
 
-      <button id="changeColor" class="layui-btn layui-btn-primary">save</button>
-
+      <p>网页设置</p>
+      <hr>
+      <div class="layui-row">
+        <input class="layui-input" placeholder="网站域名" title="网站域名" id="domain"/>
+      </div>
+      <div class="layui-row">
+        <input class="layui-input" placeholder="网站" title="网站得key" id="domiankey"/>
+      </div>
+      <div class="layui-row">
+        <div class="layui-col-md3 ">
+          <!--         设置网页和域名和key的关联-->
+          <button id="setThisWebUrl" class="layui-btn">设置网页数据</button>
+        </div>
+        <div class="layui-col-md3">
+          <!--        获取网页和域名和key的关联-->
+          <button id="getThisWebUrl" class="layui-btn">获取网页数据</button>
+        </div>
+      </div>
 
     </div>
+
+
+
 
     <script src="popup.js"></script>
 
