@@ -19,16 +19,18 @@ window.Utils.layuiError = function (msg,successCallback) {
     });
 }
 
-window.Utils.setItemSync = function (item,success) {
+window.Utils.setItemSync = function (key,value,success) {
+    let item = {};
+    item[key] = value;
     chrome.storage.sync.set(item, ()=>{
         success && success();
     });
 }
 
-window.Utils.getItemSync = function (item,success) {
-     chrome.storage.sync.get(item, (data)=>{
-        success && success(data);
+window.Utils.getItemSync = function (key,success) {
+    Utils.GetItemSyncValue = "";
+    chrome.storage.sync.get(key, (data)=>{
+        success && success(data[key]);
         console.log(data);
     });
-
 }
