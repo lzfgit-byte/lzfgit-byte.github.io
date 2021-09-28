@@ -2,7 +2,7 @@ import {imgData} from './imgData.js'
 let data = {
     defaultImg:`${imgData.default}`,
     defaulticon:`https://www.google.com/s2/favicons?domain=`,
-    defaultIcon2:'https://api.iowen.cn/favicon/',
+    defaulticon2:'https://api.iowen.cn/favicon/',
     webs:[
         {href:"https://www.163.com/",src:`${imgData['hx']}`,name:"网易",show:false,domain:"163.com"},
         {href:"https://v2hx.github.io/",src:`${imgData['hx']}`,name:"红杏"}
