@@ -17,7 +17,7 @@ let data = {
         ,{href:"http://gbtgame.ys168.com/",src:`${imgData['gbt']}`,name:"GBT"}
         ,{href:"https://www.google.com/sky/",src:`${imgData['goosky']}`,name:"GoogleSky"}
         ,{href:"https://www.dandanzan.cc/",src:`${imgData['ddz']}`,name:"蛋蛋赞"}
-        ,{href:"http://www.8hyyw.com/",src:`${imgData['8h']}`,name:"8号影院"}
+        ,{href:"http://www.8hyyw.com/",src:`${imgData['8h']}`,show:false,name:"8号影院"}
         ,{href:"https://www.o8tv.com/",src:`${imgData['555']}`,name:"555影院"}
         ,{href:"http://www.tvyan.com/",name:"电视眼",domain:"tvyan.com"}
 
