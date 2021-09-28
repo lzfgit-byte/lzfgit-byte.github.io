@@ -58,7 +58,7 @@ let indexObj = {
                     value.src = data.defaultImg;
                 }
                 if(value.domain){
-                    value.src = data.defaulticon + value.domain;
+                    value.src = data.defaulticon2 + 'www.' + value.domain + '.png';
                 }
                 let temp = `<li data_old="1" class="sigleRecommond"> <span old_del="${++count}" class="del-flag glyphicon glyphicon-remove"></span> 
                  <a class="singleLink animate__animated animate__backInRight" href="${value.href}" title="" target="_blank"> <img class="img-links2" src="${value.src}" 
