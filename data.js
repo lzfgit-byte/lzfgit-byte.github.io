@@ -20,7 +20,7 @@ let data = {
         ,{href:"http://www.8hyyw.com/",src:`${imgData['8h']}`,show:false,name:"8号影院"}
         ,{href:"https://www.o8tv.com/",src:`${imgData['555']}`,name:"555影院"}
         ,{href:"http://www.tvyan.com/",name:"电视眼",domain:"tvyan.com"}
-        ,{href:"http://dyxs12.com/",name:"电影先生",domain:"dyxs12.com"}
+        ,{href:"http://dyxs12.com/",name:"电影先生",domain:"DianYing.im"}
 
 
     ],
