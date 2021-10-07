@@ -22,6 +22,7 @@ let data = {
         ,{href:"https://www.o8tv.com/",src:`${imgData['555']}`,name:"555影院"}
         ,{href:"http://www.tvyan.com/",name:"电视眼",domain:"tvyan.com"}
         ,{href:"http://dyxs12.com/",name:"电影先生",domain:"DianYing.im"}
+        ,{href:"https://axutongxue.com/",name:"储物间",domain:"axutongxue.com"}
 
 
     ],
