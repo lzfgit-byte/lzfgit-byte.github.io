@@ -23,7 +23,7 @@ let data = {
         ,{href:"http://www.tvyan.com/",name:"电视眼",domain:"tvyan.com"}
         ,{href:"http://dyxs12.com/",name:"电影先生",domain:"DianYing.im"}
         ,{href:"https://axutongxue.com/",name:"储物间",domain:"axutongxue.com"}
-        ,{href:"http://yck.mumuceo.com/",name:"阅读源",domain:"yck.mumuceo.com"}
+        ,{href:"http://yck.mumuceo.com/",name:"阅读源",domain:"yck.mumuceo.com",show:false}
 
 
     ],
