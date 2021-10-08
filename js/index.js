@@ -45,6 +45,13 @@ let indexObj = {
             let $this = $(this);
             $this.val("$duck ");
         })
+
+        $("#header-box").on("mouseover" ,() => {
+            $(".calendar").hide()
+        }).on("click",()=>{
+            $(".calendar").show();
+        })
+
     }
     ,initData:function () {
         let $this = $("#dataContains");

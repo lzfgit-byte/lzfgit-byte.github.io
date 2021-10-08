@@ -6,26 +6,49 @@
     <title>牛牛导航</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-<!--    <link id="bs-css" href="./css/bootstrap.paper.min.css" rel="stylesheet" type="text/css">-->
+    <!--    <link id="bs-css" href="./css/bootstrap.paper.min.css" rel="stylesheet" type="text/css">-->
     <link href="./css/wodecss.css" rel="stylesheet" type="text/css">
     <link href="./css/mycss.css" rel="stylesheet" type="text/css">
     <link href="./css/animate.css" rel="stylesheet" type="text/css">
-
+    <style>
+        #hideDiv {
+            width: 26px;
+            height: 354px;
+            position: absolute;
+            z-index: 99999999;
+            left: 19vw;
+            top: -19%;
+            background-color: white;
+        }
+        .calendar{
+            display: none;
+        }
+    </style>
 
 </head>
 <body>
+
+    <div id='hideDiv' class="calendar"></div>
+    <iframe id="api_iframe_bmcx" class="calendar" name="api_iframe_bmcx" style='position: absolute;top: -39%;left:-0%'
+            src="https://www.bmcx.com/apiiframe/?api_from=bmcx&api_url=https://wannianrili.bmcx.com/&api_width=98%&api_backgroundcolor=FFFFFF"
+            width="390" scrolling="auto" height="490" frameborder="0"></iframe>
+
+
+
+
 <!--搜索栏-->
 <div class="framework">
     <div class="top-section">
         <div class="useful-links animate__animated  animate__backInDown">
             <div id="search" class="search" align="center">
                 <div class="logo-box" align="center">
-                    <div id="header-box" class="header_img "></div>
+                    <div id="header-box" class="header_img " ></div>
                 </div>
                 <div class="search-wrapper">
                     <div class="searchbar">
-                        <img src="./images/search.svg" class="mg">
-                        <input type="text" id="search2" class="" placeholder="Search Google or type a URL" name="keyword">
+                        <img src="./images/search.svg" class="mg" >
+                        <input type="text" id="search2" class="" placeholder="Search Google or type a URL"
+                               name="keyword">
                     </div>
                 </div>
             </div>
