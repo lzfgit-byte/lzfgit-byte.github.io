@@ -99,7 +99,7 @@ let indexObj = {
                 maxmin: true,
                 end:function () {
                     nes.stop()
-                    layui.closeAll();
+                    layui.layer.closeAll();
                 },
                 resizing: function(layero){
                     let width = layero[0].clientWidth;
