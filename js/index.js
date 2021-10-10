@@ -1,8 +1,9 @@
 import {data} from '../data.js'
 
 let indexObj = {
+    $:layui.jquery,
     bind:function () {
-
+        let $ = layui.jquery;
         $('#search2').off().on("keydown",function () {
             let $this = $(this);
             if (event.code == "Enter") {
@@ -54,6 +55,7 @@ let indexObj = {
 
     }
     ,initData:function () {
+        let $ = layui.jquery;
         let $this = $("#dataContains");
         $this.hide();
         let webs = data.webs;
@@ -81,10 +83,63 @@ let indexObj = {
         }
         $this.html(html);
         $this.show();
+    },
+    initFc:function () {
+        let $ = this.$;
+
+        $("#header-box").on("contextmenu",function () {
+            event.preventDefault();
+            event.stopPropagation();
+            let multiple = 1.7;
+            let index = layui.layer.open({
+                type: 1,
+                offset: 'auto',
+                area: ['880px', '900px'],
+                content: $('#emulator'),
+                maxmin: true,
+                end:function () {
+                    nes.stop()
+                },
+                resizing: function(layero){
+                    let width = layero[0].clientWidth;
+                    let height = layero[0].clientHeight;
+
+                    let multiple1 = width / 512;
+                    let multiple2 = height / 480;
+
+                    let trueMult = Math.min(multiple1,multiple2)-0.1;
+
+                    nes.ui.screen.animate({
+                        width: `${512*trueMult}px`,
+                        height: `${480*trueMult}px`
+                    });
+                },
+                success:function () {
+                    nes.ui.screen.animate({
+                        width: `${512*multiple}px`,
+                        height: `${480*multiple}px`
+                    });
+                    let status = $('.layui-layer-title');
+                    if(status.length > 0){
+                        let text = nes.ui.status.text();
+                        nes.ui.status.remove();
+                        nes.ui.status = $('.layui-layer-title');
+                        nes.ui.status.text(text);
+                    }
+
+                }
+            });
+
+            // layer.full(index);
+        })
+
+
+
     }
     ,init:function () {
-        this.bind()
-        this.initData()
+        this.bind();
+        this.initData();
+        this.initFc();
     }
 
 };

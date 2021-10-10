@@ -1,5 +1,5 @@
 let layer = layui.layer;
-let $ = layui.jquery;
+// let $ = layui.jquery;
 window.Utils = {};
 
 window.Utils.layuiOk = function (msg,successCallback) {
