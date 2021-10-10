@@ -99,6 +99,7 @@ let indexObj = {
                 maxmin: true,
                 end:function () {
                     nes.stop()
+                    layui.closeAll();
                 },
                 resizing: function(layero){
                     let width = layero[0].clientWidth;
@@ -127,6 +128,28 @@ let indexObj = {
                         nes.ui.status.text(text);
                     }
 
+
+                    layui.layer.open({
+                        type: 1,
+                        offset: 'rt',
+                        area: ['300px', '600px'],
+                        content: $('#roms'),
+                        shade: 0,
+                        success:function () {
+                            let romDom = $('.nes-roms select');
+
+                            $('#romsOption').html(romDom.html())
+
+
+                            layui.form.render()
+                            layui.form.on('select(romsOption)', function(data){
+                                console.log(data.elem); //得到select原始DOM对象
+                                console.log(data.value); //得到被选中的值
+                                console.log(data.othis); //得到美化后的DOM对象
+                                nes.ui.loadROM(data.value)
+                            });
+                        }
+                    })
                 }
             });
 

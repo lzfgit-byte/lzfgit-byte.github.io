@@ -10,6 +10,7 @@
     <link href="./css/wodecss.css" rel="stylesheet" type="text/css">
     <link href="./css/mycss.css" rel="stylesheet" type="text/css">
     <link href="./css/animate.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="layui/css/layui.css">
     <style>
         #hideDiv {
             width: 26px;
@@ -20,7 +21,8 @@
             top: -19%;
             background-color: white;
         }
-        .calendar{
+
+        .calendar {
             display: none;
         }
     </style>
@@ -28,12 +30,10 @@
 </head>
 <body>
 
-    <div id='hideDiv' class="calendar"></div>
-    <iframe id="api_iframe_bmcx" class="calendar" name="api_iframe_bmcx" style='position: absolute;top: -39%;left:-0%'
-            src="https://www.bmcx.com/apiiframe/?api_from=bmcx&api_url=https://wannianrili.bmcx.com/&api_width=98%&api_backgroundcolor=FFFFFF"
-            width="390" scrolling="auto" height="490" frameborder="0"></iframe>
-
-
+<div id='hideDiv' class="calendar"></div>
+<iframe id="api_iframe_bmcx" class="calendar" name="api_iframe_bmcx" style='position: absolute;top: -39%;left:-0%'
+        src="https://www.bmcx.com/apiiframe/?api_from=bmcx&api_url=https://wannianrili.bmcx.com/&api_width=98%&api_backgroundcolor=FFFFFF"
+        width="390" scrolling="auto" height="490" frameborder="0"></iframe>
 
 
 <!--搜索栏-->
@@ -42,11 +42,11 @@
         <div class="useful-links animate__animated  animate__backInDown">
             <div id="search" class="search" align="center">
                 <div class="logo-box" align="center">
-                    <div id="header-box" class="header_img " ></div>
+                    <div id="header-box" class="header_img "></div>
                 </div>
                 <div class="search-wrapper">
                     <div class="searchbar">
-                        <img src="./images/search.svg" class="mg" >
+                        <img src="./images/search.svg" class="mg">
                         <input type="text" id="search2" class="" placeholder="Search Google or type a URL"
                                name="keyword">
                     </div>
@@ -74,10 +74,24 @@
 <script type="module" src="js/index.js"></script>
 
 
-
 <!--fc-->
-    <div id="emulator" style="display: none"></div>
-
+<div id="emulator" style="display: none"></div>
+<div id="roms" class="layui-form" style="display: none">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <select name="interest" id="romsOption"  lay-filter="romsOption">
+                    <option value=""></option>
+                    <option value="0">写作</option>
+                    <option value="1" selected="">阅读</option>
+                    <option value="2">游戏</option>
+                    <option value="3">音乐</option>
+                    <option value="4">旅行</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
 
 
 <script src="lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
@@ -90,7 +104,7 @@
 <script src="source/ppu.js" type="text/javascript" charset="utf-8"></script>
 <script src="source/rom.js" type="text/javascript" charset="utf-8"></script>
 <script src="source/ui.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/gamepad.js"  type="module" charset="utf-8"></script>
+<script src="source/gamepad.js" type="module" charset="utf-8"></script>
 <script src="source/initnes.js" type="text/javascript" charset="utf-8"></script>
 <!--[if IE]>
 <script type="text/vbscript" src="source/jsnes-ie-hacks.vbscript"></script>

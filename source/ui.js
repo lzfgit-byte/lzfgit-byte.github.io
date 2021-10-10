@@ -43,7 +43,7 @@ if (typeof jQuery !== 'undefined') {
                     return;
                 }
                 
-                self.romContainer = $('<div class="nes-roms"></div>').appendTo(self.root);
+                self.romContainer = $('<div class="nes-roms" style="display: none"></div>').appendTo(self.root);
                 self.romSelect = $('<select></select>').appendTo(self.romContainer);
                 
                 self.controls = $('<div class="nes-controls" style="display: none"></div>').appendTo(self.root);
@@ -211,7 +211,40 @@ if (typeof jQuery !== 'undefined') {
                         }
                     });
                 },
-                
+                loadROM: function(srcUrl) {
+                    var self = this;
+                    self.updateStatus("Downloading...");
+                    $.ajax({
+                        url: encodeURIComponent(srcUrl),
+                        xhr: function() {
+                            var xhr = $.ajaxSettings.xhr();
+                            if (typeof xhr.overrideMimeType !== 'undefined') {
+                                // Download as binary
+                                xhr.overrideMimeType('text/plain; charset=x-user-defined');
+                            }
+                            self.xhr = xhr;
+                            return xhr;
+                        },
+                        complete: function(xhr, status) {
+                            var i, data;
+                            if (JSNES.Utils.isIE()) {
+                                var charCodes = JSNESBinaryToArray(
+                                    xhr.responseBody
+                                ).toArray();
+                                data = String.fromCharCode.apply(
+                                    undefined,
+                                    charCodes
+                                );
+                            }
+                            else {
+                                data = xhr.responseText;
+                            }
+                            self.nes.loadRom(data);
+                            self.nes.start();
+                            self.enable();
+                        }
+                    });
+                },
                 resetCanvas: function() {
                     this.canvasContext.fillStyle = 'black';
                     // set alpha to opaque
