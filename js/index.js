@@ -152,18 +152,14 @@ let indexObj = {
             ,isAllowSpread: false //禁止菜单组展开收缩
             ,style: 'width: 200px' //定义宽度，默认自适应
             ,id: 'test777' //定义唯一索引
-            ,data: [{
-                title: '日历'
-                ,id: 'calendar'
-            },{
-                title:"FC"
-                ,id:"nesFc"
-            }]
+            ,data: [{title: '日历',id: 'calendar'},{title:"FC",id:"nesFc"},{title:"设置按键",id:"setKeyBoard"}]
             ,click: function(obj, othis){
                 if(obj.id === 'calendar'){
                     indexObj.openCalender()
                 } else if(obj.id === 'nesFc'){
                     indexObj.setFc();
+                }else if(obj.id === 'setKeyBoard'){
+
                 }
             }
             ,ready: function(elemPanel, elem){
