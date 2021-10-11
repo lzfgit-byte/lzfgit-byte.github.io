@@ -113,7 +113,7 @@ let indexObj = {
                     nes.ui.screen.animate({
                         width: `${512*trueMult}px`,
                         height: `${480*trueMult}px`
-                    });
+                    },0);
                 },
                 success:function () {
                     nes.ui.screen.animate({
