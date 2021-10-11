@@ -3,17 +3,6 @@ $(function() {
     nes = new JSNES({
         emulateSound:true,
         'ui': $('#emulator').JSNESUI({
-            "经典": [
-                ['赤影战士 Kage', 'roms/other/Kage.nes'],
-                ['中国象棋', 'roms/other/Zhong Guo Xiang Qi.nes'],
-                ['吃豆精灵 (J) (V1.1) Pac-Man [!]', 'roms/other/Pac-Man.nes'],
-                ['摩托车大赛 (J) (PRG1) Mach Rider [!]', 'roms/other/Mach Rider.nes'],
-                ['沙罗曼蛇 (U) Life Force', 'roms/rom2/Life Force [!].nes'],
-                ['1943 (U) 1943 - The Battle of Midway', 'roms/rom2/1943.nes'],
-                ['脱狱 Cross Fire (J)', 'roms/rom2/Cross Fire (J).nes'],
-                ['撞球咖啡馆 Shufflepuck Cafe', 'roms/rom2/Shufflepuck Cafe.nes'],
-                ['功夫 (J) (V1.2) Yie Ar Kung-Fu [!]', 'roms/rom1/(J) (V1.2) Yie Ar Kung-Fu [!].nes'],
-            ],
             "魂斗罗": [
                 ['魂斗罗1(U)30', 'roms/Contra/Contra1(U)30.nes'],
                 ['魂斗罗1(U)30F', 'roms/Contra/Contra1(U)30F.nes'],
@@ -24,11 +13,6 @@ $(function() {
                 ['魂斗罗1(U)L', 'roms/Contra/Contra1(U)L.nes'],
                 ['魂斗罗1(U)M', 'roms/Contra/Contra1(U)M.nes'],
                 ['魂斗罗1(U)S', 'roms/Contra/Contra1(U)S.nes'],
-            ],
-            "坦克": [
-                ['坦克 (Ch) Missile Tank', 'roms/rom1/(Ch) Missile Tank.nes'],
-                ['坦克 (Ch) Tank 1990', 'roms/rom1/(Ch) Tank 1990.nes'],
-                ['坦克 (J) Battle City', 'roms/rom1/(J) Battle City.nes'],
             ],
             "超级玛丽": [
                 ['超级马里奥1 (W) Super Mario Bros. [!]', 'roms/rom1/(W) Super Mario Bros. [!].nes'],
@@ -41,6 +25,22 @@ $(function() {
                 ['双截龙2 Double Dragon2', 'roms/Double Dragon/Double Dragon2.nes'],
                 ['双截龙3 Double Dragon3', 'roms/Double Dragon/Double Dragon3.nes'],
                 ['双截龙4 Double Dragon4', 'roms/Double Dragon/Double Dragon4.nes'],
+            ],
+            "坦克": [
+                ['坦克 (Ch) Missile Tank', 'roms/rom1/(Ch) Missile Tank.nes'],
+                ['坦克 (Ch) Tank 1990', 'roms/rom1/(Ch) Tank 1990.nes'],
+                ['坦克 (J) Battle City', 'roms/rom1/(J) Battle City.nes'],
+            ],
+            "经典": [
+                ['赤影战士 Kage', 'roms/other/Kage.nes'],
+                ['中国象棋', 'roms/other/Zhong Guo Xiang Qi.nes'],
+                ['吃豆精灵 (J) (V1.1) Pac-Man [!]', 'roms/other/Pac-Man.nes'],
+                ['摩托车大赛 (J) (PRG1) Mach Rider [!]', 'roms/other/Mach Rider.nes'],
+                ['沙罗曼蛇 (U) Life Force', 'roms/rom2/Life Force [!].nes'],
+                ['1943 (U) 1943 - The Battle of Midway', 'roms/rom2/1943.nes'],
+                ['脱狱 Cross Fire (J)', 'roms/rom2/Cross Fire (J).nes'],
+                ['撞球咖啡馆 Shufflepuck Cafe', 'roms/rom2/Shufflepuck Cafe.nes'],
+                ['功夫 (J) (V1.2) Yie Ar Kung-Fu [!]', 'roms/rom1/(J) (V1.2) Yie Ar Kung-Fu [!].nes'],
             ],
             "淘金者": [
                 ['淘金者(汉化)', 'roms/rom1/TaoJinZhe.nes'],
