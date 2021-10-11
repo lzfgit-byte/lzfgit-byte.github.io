@@ -46,14 +46,6 @@ let indexObj = {
             let $this = $(this);
             $this.val("$duck ");
         })
-
-        $("#header-box").on("mouseover" ,() => {
-            $(".calendar").hide()
-        }).on("click",()=>{
-            $('#api_iframe_bmcx').attr('src',"https://www.bmcx.com/apiiframe/?api_from=bmcx&api_url=https://wannianrili.bmcx.com/&api_width=98%&api_backgroundcolor=FFFFFF")
-            $(".calendar").show();
-        })
-
     }
     ,initData:function () {
         let $ = layui.jquery;
@@ -85,85 +77,115 @@ let indexObj = {
         $this.html(html);
         $this.show();
     },
-    initFc:function () {
-        let $ = this.$;
+    setFc:function () {
+        let multiple = 1.7;
+        let index = layui.layer.open({
+            type: 1,
+            offset: 'auto',
+            area: ['880px', '900px'],
+            content: $('#emulator'),
+            maxmin: true,
+            end:function () {
+                nes.stop()
+                layui.layer.closeAll();
+                $('#emulator').hide();
+                $('#roms').hide();
+            },
+            resizing: function(layero){
+                let width = layero[0].clientWidth;
+                let height = layero[0].clientHeight;
 
-        $("#header-box").on("contextmenu",function () {
-            event.preventDefault();
-            event.stopPropagation();
-            let multiple = 1.7;
-            let index = layui.layer.open({
-                type: 1,
-                offset: 'auto',
-                area: ['880px', '900px'],
-                content: $('#emulator'),
-                maxmin: true,
-                end:function () {
-                    nes.stop()
-                    layui.layer.closeAll();
-                },
-                resizing: function(layero){
-                    let width = layero[0].clientWidth;
-                    let height = layero[0].clientHeight;
+                let multiple1 = width / 512;
+                let multiple2 = height / 480;
 
-                    let multiple1 = width / 512;
-                    let multiple2 = height / 480;
+                let trueMult = Math.min(multiple1,multiple2)-0.1;
 
-                    let trueMult = Math.min(multiple1,multiple2)-0.1;
-
-                    nes.ui.screen.animate({
-                        width: `${512*trueMult}px`,
-                        height: `${480*trueMult}px`
-                    },0);
-                },
-                success:function () {
-                    nes.ui.screen.animate({
-                        width: `${512*multiple}px`,
-                        height: `${480*multiple}px`
-                    });
-                    let status = $('.layui-layer-title');
-                    if(status.length > 0){
-                        let text = nes.ui.status.text();
-                        nes.ui.status.remove();
-                        nes.ui.status = $('.layui-layer-title');
-                        nes.ui.status.text(text);
-                    }
-
-
-                    layui.layer.open({
-                        type: 1,
-                        offset: 'rt',
-                        area: ['300px', '600px'],
-                        content: $('#roms'),
-                        shade: 0,
-                        success:function () {
-                            let romDom = $('.nes-roms select');
-
-                            $('#romsOption').html(romDom.html())
-
-
-                            layui.form.render()
-                            layui.form.on('select(romsOption)', function(data){
-                                console.log(data.elem); //得到select原始DOM对象
-                                console.log(data.value); //得到被选中的值
-                                console.log(data.othis); //得到美化后的DOM对象
-                                nes.ui.loadROM(data.value)
-                            });
-                        }
-                    })
+                nes.ui.screen.animate({
+                    width: `${512*trueMult}px`,
+                    height: `${480*trueMult}px`
+                },0);
+            },
+            success:function () {
+                nes.ui.screen.animate({
+                    width: `${512*multiple}px`,
+                    height: `${480*multiple}px`
+                });
+                let status = $('.layui-layer-title');
+                if(status.length > 0){
+                    let text = nes.ui.status.text();
+                    nes.ui.status.remove();
+                    nes.ui.status = $('.layui-layer-title');
+                    nes.ui.status.text(text);
                 }
-            });
-
-            // layer.full(index);
-        })
 
 
+                layui.layer.open({
+                    type: 1,
+                    offset: 'rt',
+                    area: ['300px', '600px'],
+                    content: $('#roms'),
+                    shade: 0,
+                    success:function () {
+                        let romDom = $('.nes-roms select');
 
+                        $('#romsOption').html(romDom.html())
+
+
+                        layui.form.render()
+                        layui.form.on('select(romsOption)', function(data){
+                            console.log(data.elem); //得到select原始DOM对象
+                            console.log(data.value); //得到被选中的值
+                            console.log(data.othis); //得到美化后的DOM对象
+                            nes.ui.loadROM(data.value)
+                        });
+                    }
+                })
+            }
+        });
+
+        // layer.full(index);
+    }
+    ,initContentMenu:function () {
+        var inst = layui.dropdown.render({
+            elem: document //也可绑定到 document，从而重置整个右键
+            ,trigger: 'contextmenu' //contextmenu
+            ,isAllowSpread: false //禁止菜单组展开收缩
+            ,style: 'width: 200px' //定义宽度，默认自适应
+            ,id: 'test777' //定义唯一索引
+            ,data: [{
+                title: '日历'
+                ,id: 'calendar'
+            },{
+                title:"FC"
+                ,id:"nesFc"
+            }]
+            ,click: function(obj, othis){
+                if(obj.id === 'calendar'){
+                    indexObj.openCalender()
+                } else if(obj.id === 'nesFc'){
+                    indexObj.setFc();
+                }
+            }
+            ,ready: function(elemPanel, elem){
+                let top = parseInt(elemPanel[0].style.top);
+                elemPanel[0].style.top = `${top-120}px`
+            }
+
+        });
+    },openCalender:function () {
+        layer.open({
+            type: 2,
+            title: '日历',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['400px', '730px'],
+            content: 'https://www.bmcx.com/apiiframe/?api_from=bmcx&api_url=https://wannianrili.bmcx.com/&api_width=98%&api_backgroundcolor=FFFFFF' //iframe的url
+        });
     }
     ,init:function () {
         this.bind();
         this.initData();
-        this.initFc();
+        this.initContentMenu();
     }
 
 };
