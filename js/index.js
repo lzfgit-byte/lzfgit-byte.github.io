@@ -50,6 +50,7 @@ let indexObj = {
         $("#header-box").on("mouseover" ,() => {
             $(".calendar").hide()
         }).on("click",()=>{
+            $('#api_iframe_bmcx').attr('src',"https://www.bmcx.com/apiiframe/?api_from=bmcx&api_url=https://wannianrili.bmcx.com/&api_width=98%&api_backgroundcolor=FFFFFF")
             $(".calendar").show();
         })
 
