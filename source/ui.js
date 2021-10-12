@@ -55,6 +55,7 @@ let romsData = {
             ],
             "1981": [
                 ['五子棋 (5) 日版', 'roms/1981/5.nes'],
+                ['快打旋风', 'roms/1981/kuaidaxuanfeng.nes'],
             ],
             "其它": [
                 ['泡泡 Bubble Bobble (U)', 'roms/bfirsh/Bubble Bobble (U).nes'],
