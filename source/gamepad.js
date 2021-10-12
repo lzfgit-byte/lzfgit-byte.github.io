@@ -1,4 +1,3 @@
-import {jsnes} from "./index";
 
 var gamepadInfo = {}
 var start;
