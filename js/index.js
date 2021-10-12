@@ -118,12 +118,17 @@ let indexObj = {
                     height: `${480*multiple}px`
                 });
                 let status = $('.layui-layer-title');
-                // if(status.length > 0){
-                //     let text = nes.ui.status.text();
-                //     nes.ui.status.remove();
-                //     nes.ui.status = $('.layui-layer-title');
-                //     nes.ui.status.text(text);
-                // }
+                if(status.length > 0){
+                    let startTime = 0
+                    holdNes.nes.ui.updateStatus = async function (text) {
+                        let nowTime = new Date().getTime();
+                        if(nowTime - startTime < 300){
+                            return ;
+                        }
+                        startTime = nowTime;
+                        status.text(text);
+                    }
+                }
 
 
                 layui.layer.open({

@@ -30,6 +30,8 @@ holdNes.nes = nes;
 
 //浏览器更新页面时的回调
 function onAnimationFrame() {
+
+    nes.ui.updateStatus(`FPS:${parseInt(nes.getFPS())}`);
     window.requestAnimationFrame(onAnimationFrame);
 
     image.data.set(framebuffer_u8);
