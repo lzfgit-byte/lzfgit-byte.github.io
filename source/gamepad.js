@@ -74,9 +74,12 @@ kesA[_keyA] = "KEY_A"
 kesA[_keyB] = "KEY_B"
 kesA[_tubA] = "KEY_AA"
 kesA[_tubB] = "KEY_BB"
-
+!function(){
+    let temp3 = localStorage.getItem("kesPad");
+    kesA = temp3 != null && temp3 ? JSON.parse(temp3):kesA;
+}()
 let pressKey = [];
-
+let keyPress;
 function gameLoop() {
     var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
     if (!gamepads) return;
@@ -96,6 +99,7 @@ function gameLoop() {
             if (pressKey.indexOf(i) === -1) {
                 //触发按下
                 console.log(`按下了${kesA[i]}`)
+                keyPress = i;
                 // nes.keyboard.setNESKeyBord(keys[kesA[i]],0x41)
                 holdNes.nes.buttonDown(1,keys[kesA[i]])
                 pressKey[pressKey.length] = i;
@@ -144,6 +148,18 @@ async function tubrro(key) {
     setTimeout(()=>{
         // nes.keyboard.setNESKeyBord(key,0x40)
         holdNes.nes.buttonUp(1,key)
-    })
+    },10)
 
 }
+let gamePadApi = {
+    kesPad:kesA,
+    saveKesPadSet:function () {
+        localStorage.setItem("kesPad",JSON.stringify(kesA))
+    },
+    setGamePad:function (value,callback) {
+        kesA[keyPress] = value;
+        callback(keyPress);
+    }
+}
+
+export {gamePadApi};

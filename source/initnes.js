@@ -59,33 +59,55 @@ function audio_callback(event) {
 
     audio_read_cursor = (audio_read_cursor + len) & SAMPLE_MASK;
 }
+let player1Set = {BUTTON_A:222,BUTTON_B:186,BUTTON_SELECT:32,BUTTON_START:13,BUTTON_UP:87,BUTTON_DOWN:83,BUTTON_LEFT:65,BUTTON_RIGHT:68}
+let player2Set = {BUTTON_A:97,BUTTON_B:98,BUTTON_SELECT:100,BUTTON_START:101,BUTTON_UP:38,BUTTON_DOWN:40,BUTTON_LEFT:37,BUTTON_RIGHT:39}
+let nesSet = {reSet:80,PauseAndStart:52}
+;!function(){
+    let temp = localStorage.getItem("player1Set");;
+    player1Set = temp != null && temp ? JSON.parse(temp):player1Set;
+
+    let temp2 = localStorage.getItem("player2Set");;
+    player2Set = temp2 != null && temp2 ? JSON.parse(temp2):player2Set;
+
+    let temp3 = localStorage.getItem("nesSet");;
+    nesSet = temp3 != null && temp3 ? JSON.parse(temp3):nesSet;
+}();
+holdNes.player1Set = player1Set;
+holdNes.player2Set = player2Set;
+holdNes.nesSet = nesSet;
+
+holdNes.saveThisKeyMap = function () {
+    localStorage.setItem("player1Set",JSON.stringify(player1Set))
+    localStorage.setItem("player2Set",JSON.stringify(player2Set))
+    localStorage.setItem("nesSet",JSON.stringify(nesSet))
+}
 
 function keyboard(callback, event) {
     var player1 = 1;
     var player2 = 2;
 
     switch (event.keyCode) {
-        case 222: callback(player1, jsnes.Controller.BUTTON_A); break;      // '
-        case 186: callback(player1, jsnes.Controller.BUTTON_B); break;      // ; (Central European keyboard) 89
-        case 32: callback(player1, jsnes.Controller.BUTTON_SELECT); break; // Spacebar Ctrl
-        case 13: callback(player1, jsnes.Controller.BUTTON_START); break;  // Enter
-        case 87: callback(player1, jsnes.Controller.BUTTON_UP); break;     // W 38
-        case 83: callback(player1, jsnes.Controller.BUTTON_DOWN); break;   // S 40
-        case 65: callback(player1, jsnes.Controller.BUTTON_LEFT); break;   // A 37
-        case 68: callback(player1, jsnes.Controller.BUTTON_RIGHT); break;  // D 39
+        case player1Set.BUTTON_A: callback(player1, jsnes.Controller.BUTTON_A); break;      // '
+        case player1Set.BUTTON_B: callback(player1, jsnes.Controller.BUTTON_B); break;      // ; (Central European keyboard) 89
+        case player1Set.BUTTON_SELECT: callback(player1, jsnes.Controller.BUTTON_SELECT); break; // Spacebar Ctrl
+        case player1Set.BUTTON_START: callback(player1, jsnes.Controller.BUTTON_START); break;  // Enter
+        case player1Set.BUTTON_UP: callback(player1, jsnes.Controller.BUTTON_UP); break;     // W 38
+        case player1Set.BUTTON_DOWN: callback(player1, jsnes.Controller.BUTTON_DOWN); break;   // S 40
+        case player1Set.BUTTON_LEFT: callback(player1, jsnes.Controller.BUTTON_LEFT); break;   // A 37
+        case player1Set.BUTTON_RIGHT: callback(player1, jsnes.Controller.BUTTON_RIGHT); break;  // D 39
 
-        case 97: callback(player2, jsnes.Controller.BUTTON_A); break;     // Num-1
-        case 98: callback(player2, jsnes.Controller.BUTTON_B); break;     // Num-2
-        case 100: callback(player2, jsnes.Controller.BUTTON_SELECT); break; // Num-4
-        case 101: callback(player2, jsnes.Controller.BUTTON_START); break;  // Num-5
-        case 38: callback(player2, jsnes.Controller.BUTTON_UP); break;    // Up 38
-        case 40: callback(player2, jsnes.Controller.BUTTON_DOWN); break;   // Down 40
-        case 37: callback(player2, jsnes.Controller.BUTTON_LEFT); break;  // Left 37
-        case 39: callback(player2, jsnes.Controller.BUTTON_RIGHT);break; // Right 39
+        case player2Set.BUTTON_A: callback(player2, jsnes.Controller.BUTTON_A); break;     // Num-1
+        case player2Set.BUTTON_B: callback(player2, jsnes.Controller.BUTTON_B); break;     // Num-2
+        case player2Set.BUTTON_SELECT: callback(player2, jsnes.Controller.BUTTON_SELECT); break; // Num-4
+        case player2Set.BUTTON_START: callback(player2, jsnes.Controller.BUTTON_START); break;  // Num-5
+        case player2Set.BUTTON_UP: callback(player2, jsnes.Controller.BUTTON_UP); break;    // Up 38
+        case player2Set.BUTTON_DOWN: callback(player2, jsnes.Controller.BUTTON_DOWN); break;   // Down 40
+        case player2Set.BUTTON_LEFT: callback(player2, jsnes.Controller.BUTTON_LEFT); break;  // Left 37
+        case player2Set.BUTTON_RIGHT: callback(player2, jsnes.Controller.BUTTON_RIGHT);break; // Right 39
 
-        case 80:if(event.type === "keydown"){reStart();}break; // p 重启
+        case nesSet.reSet:if(event.type === "keydown"){reStart();}break; // p 重启
         case 86:if(event.type === "keydown"){toggleVoice();}break; // V 开启关闭声音
-        case 82:if(event.type === "keydown"){toggleRunAndStart();}break; // r 暂停，继续
+        case nesSet.PauseAndStart:if(event.type === "keydown"){toggleRunAndStart();}break; // r 暂停，继续
 
 
         default: return true;
