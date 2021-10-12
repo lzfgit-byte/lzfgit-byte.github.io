@@ -141,8 +141,14 @@ let indexObj = {
                             if (roms.hasOwnProperty(groupName)) {
                                 var optgroup = $('<optgroup></optgroup>').
                                 attr("label", groupName);
+                                let selected = "";
                                 for (var i = 0; i < roms[groupName].length; i++) {
-                                    $('<option>'+roms[groupName][i][0]+'</option>')
+                                    if(roms[groupName][i][1] === 'roms/Contra/Contra1(U)30.nes'){
+                                        selected = "selected";
+                                    }else {
+                                        selected = "";
+                                    }
+                                    $(`<option ${selected}>`+roms[groupName][i][0]+'</option>')
                                         .attr("value", roms[groupName][i][1])
                                         .appendTo(optgroup);
                                 }
