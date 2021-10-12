@@ -1,31 +1,37 @@
 let romsData = {
-    "1981": [
-        ['五子棋 (5) 日版', 'roms/1981/5.nes'],
+    "最爱": [
         ['快打旋风', 'roms/1981/kuaidaxuanfeng.nes'],
         ['激龟快打', 'roms/1981/HeroTurtles.nes'],
+        ['雪人兄弟', 'roms/1981/Snow Bros. (J).nes'],
+        ['冒险岛4', 'roms/1981/maoxiandao.nes'],
+        ['魂斗罗1(U)30S', 'roms/Contra/Contra1(U)30S.nes'],
+        ['超级马里奥1 (W) Super Mario Bros. [!]', 'roms/rom1/(W) Super Mario Bros. [!].nes'],
+        ['双截龙2 Double Dragon2', 'roms/Double Dragon/Double Dragon2.nes'],
     ],
     "魂斗罗": [
         ['魂斗罗1(U)30', 'roms/Contra/Contra1(U)30.nes'],
         ['魂斗罗1(U)30F', 'roms/Contra/Contra1(U)30F.nes'],
         ['魂斗罗1(U)30L', 'roms/Contra/Contra1(U)30L.nes'],
         ['魂斗罗1(U)30M', 'roms/Contra/Contra1(U)30M.nes'],
-        ['魂斗罗1(U)30S', 'roms/Contra/Contra1(U)30S.nes'],
         ['魂斗罗1(U)F', 'roms/Contra/Contra1(U)F.nes'],
         ['魂斗罗1(U)L', 'roms/Contra/Contra1(U)L.nes'],
         ['魂斗罗1(U)M', 'roms/Contra/Contra1(U)M.nes'],
         ['魂斗罗1(U)S', 'roms/Contra/Contra1(U)S.nes'],
     ],
     "超级玛丽": [
-        ['超级马里奥1 (W) Super Mario Bros. [!]', 'roms/rom1/(W) Super Mario Bros. [!].nes'],
-        ['超级马里奥2 (W) Super Mario Bros. 3 (U)', 'roms/bfirsh/Super Mario Bros. 3 (U) (PRG1) [!].nes'],
+        ['超级马里奥3 (W) Super Mario Bros. 3 (U)', 'roms/bfirsh/Super Mario Bros. 3 (U) (PRG1) [!].nes'],
         ['马里奥拆屋工 (W) Wrecking Crew [!]', 'roms/rom1/(W) Wrecking Crew [!].nes'],
         ['马里奥医生 Dr. Mario (JU)', 'roms/bfirsh/Dr. Mario (JU).nes'],
     ],
     "双截龙": [
         ['双截龙1 Double Dragon1', 'roms/Double Dragon/Double Dragon1.nes'],
-        ['双截龙2 Double Dragon2', 'roms/Double Dragon/Double Dragon2.nes'],
         ['双截龙3 Double Dragon3', 'roms/Double Dragon/Double Dragon3.nes'],
         ['双截龙4 Double Dragon4', 'roms/Double Dragon/Double Dragon4.nes'],
+    ],
+    "俄罗斯方块": [
+        ['俄罗斯方块LJ65', 'roms/lj65/lj65.nes'],
+        ['俄罗斯方块Tetris(U)', 'roms/other/Tetris (U) [!].nes'],
+        ['俄罗斯方块Tetris 2(U)', 'roms/other/Tetris 2 (U) [!].nes'],
     ],
     "坦克": [
         ['坦克 (Ch) Missile Tank', 'roms/rom1/(Ch) Missile Tank.nes'],
@@ -47,11 +53,7 @@ let romsData = {
         ['淘金者(汉化)', 'roms/rom1/TaoJinZhe.nes'],
         ['淘金者(J)', 'roms/rom1/Championship Lode Runner (J).nes'],
     ],
-    "俄罗斯方块": [
-        ['俄罗斯方块LJ65', 'roms/lj65/lj65.nes'],
-        ['俄罗斯方块Tetris(U)', 'roms/other/Tetris (U) [!].nes'],
-        ['俄罗斯方块Tetris 2(U)', 'roms/other/Tetris 2 (U) [!].nes'],
-    ],
+
     "赛车": [
         ['F1赛车 (J) F-1 Race [!]', 'roms/rom1/(J) F-1 Race [!].nes'],
         ['摩托车大赛 (JU) (PRG0) Mach Rider [!]', 'roms/rom1/(JU) (PRG0) Mach Rider [!].nes'],
