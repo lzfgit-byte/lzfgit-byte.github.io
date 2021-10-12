@@ -59,36 +59,34 @@ function audio_callback(event) {
 }
 
 function keyboard(callback, event) {
-    var player = 1;
+    var player1 = 1;
+    var player2 = 2;
+
     switch (event.keyCode) {
-        case 38: // UP
-            callback(player, jsnes.Controller.BUTTON_UP);
-            break;
-        case 40: // Down
-            callback(player, jsnes.Controller.BUTTON_DOWN);
-            break;
-        case 37: // Left
-            callback(player, jsnes.Controller.BUTTON_LEFT);
-            break;
-        case 39: // Right
-            callback(player, jsnes.Controller.BUTTON_RIGHT);
-            break;
-        case 65: // 'a' - qwerty, dvorak
-        case 81: // 'q' - azerty
-            callback(player, jsnes.Controller.BUTTON_A);
-            break;
-        case 83: // 's' - qwerty, azerty
-        case 79: // 'o' - dvorak
-            callback(player, jsnes.Controller.BUTTON_B);
-            break;
-        case 9: // Tab
-            callback(player, jsnes.Controller.BUTTON_SELECT);
-            break;
-        case 13: // Return
-            callback(player, jsnes.Controller.BUTTON_START);
-            break;
-        default:
-            break;
+        case 222: callback(player1, jsnes.Controller.BUTTON_A); break;      // '
+        case 186: callback(player1, jsnes.Controller.BUTTON_B); break;      // ; (Central European keyboard) 89
+        case 32: callback(player1, jsnes.Controller.BUTTON_SELECT); break; // Spacebar Ctrl
+        case 13: callback(player1, jsnes.Controller.BUTTON_START); break;  // Enter
+        case 87: callback(player1, jsnes.Controller.BUTTON_UP); break;     // W 38
+        case 83: callback(player1, jsnes.Controller.BUTTON_DOWN); break;   // S 40
+        case 65: callback(player1, jsnes.Controller.BUTTON_LEFT); break;   // A 37
+        case 68: callback(player1, jsnes.Controller.BUTTON_RIGHT); break;  // D 39
+
+        case 97: callback(player2, jsnes.Controller.BUTTON_A); break;     // Num-1
+        case 98: callback(player2, jsnes.Controller.BUTTON_B); break;     // Num-2
+        case 100: callback(player2, jsnes.Controller.BUTTON_SELECT); break; // Num-4
+        case 101: callback(player2, jsnes.Controller.BUTTON_START); break;  // Num-5
+        case 38: callback(player2, jsnes.Controller.BUTTON_UP); break;    // Up 38
+        case 40: callback(player2, jsnes.Controller.BUTTON_DOWN); break;   // Down 40
+        case 37: callback(player2, jsnes.Controller.BUTTON_LEFT); break;  // Left 37
+        case 39: callback(player2, jsnes.Controller.BUTTON_RIGHT);break; // Right 39
+
+        case 80:if(event.type === "keydown"){reStart();}break; // p 重启
+        case 86:if(event.type === "keydown"){toggleVoice();}break; // V 开启关闭声音
+        case 82:if(event.type === "keydown"){toggleRunAndStart();}break; // r 暂停，继续
+
+
+        default: return true;
     }
 }
 
@@ -111,10 +109,12 @@ function nes_init(canvas_id) {
     var audio_ctx;
     if (AudioContext) {
         audio_ctx = new AudioContext({sampleRate: nes.papu.sampleRate});
+    }else {
+        Utils.layuiError("load err")
     }
     audio_ctx.resume();
     var script_processor = audio_ctx.createScriptProcessor(AUDIO_BUFFERING, 0, 2);
-    script_processor.onaudioprocess = audio_callback;
+    script_processor["onaudioprocess"] = audio_callback;
     script_processor.connect(audio_ctx.destination);
 
     holdNes.audio_ctx = audio_ctx;
@@ -165,12 +165,33 @@ function nes_load_url(canvas_id, path) {
 }
 holdNes.nes_load_url = nes_load_url;
 holdNes.alerdSet = false;
+
+function toggleVoice(){//holdNes.nes.opts.
+    if(emulateSound){
+        emulateSound = false;
+    }else{
+        emulateSound = true;
+        holdNes.audio_ctx.resume();
+    }
+}
+function toggleRunAndStart(){
+    if(holdNes.audio_ctx.state === "running"){
+        holdNes.audio_ctx.suspend();
+    }else if(holdNes.audio_ctx.state === 'suspended'){
+        holdNes.audio_ctx.resume();
+    }
+}
+
+function reStart(){
+    holdNes.nes.reloadROM()
+}
+
 document.addEventListener('keydown', (event) => {
     keyboard(nes.buttonDown, event)
 });
 document.addEventListener('keyup', (event) => {
     keyboard(nes.buttonUp, event)
 });
-// holdNes.nes.reloadROM()
-//holdNes.audio_ctx.suspend();resume
+
+
 export {holdNes};
