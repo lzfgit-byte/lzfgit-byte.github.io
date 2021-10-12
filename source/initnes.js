@@ -167,12 +167,7 @@ holdNes.nes_load_url = nes_load_url;
 holdNes.alerdSet = false;
 
 function toggleVoice(){//holdNes.nes.opts.
-    if(emulateSound){
-        emulateSound = false;
-    }else{
-        emulateSound = true;
-        holdNes.audio_ctx.resume();
-    }
+
 }
 function toggleRunAndStart(){
     if(holdNes.audio_ctx.state === "running"){
