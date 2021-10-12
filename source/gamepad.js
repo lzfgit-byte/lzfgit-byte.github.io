@@ -1,5 +1,9 @@
+import {jsnes} from "./index";
+
 var gamepadInfo = {}
 var start;
+
+import {holdNes} from "./initnes.js";
 
 var rAF = window.mozRequestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
@@ -93,7 +97,8 @@ function gameLoop() {
             if (pressKey.indexOf(i) === -1) {
                 //触发按下
                 console.log(`按下了${kesA[i]}`)
-                nes.keyboard.setNESKeyBord(keys[kesA[i]],0x41)
+                // nes.keyboard.setNESKeyBord(keys[kesA[i]],0x41)
+                holdNes.nes.buttonDown(1,keys[kesA[i]])
                 pressKey[pressKey.length] = i;
             }
             if(i === _tubA){
@@ -110,15 +115,18 @@ function gameLoop() {
             if (idnex > -1) {
                 //触发按键抬起
                 console.log(`抬起了${kesA[i]}`)
-                nes.keyboard.setNESKeyBord(keys[kesA[i]],0x40)
+                // nes.keyboard.setNESKeyBord(keys[kesA[i]],0x40)
+                holdNes.nes.buttonUp(1,keys[kesA[i]])
                 if(i === _tubA){
                     //A键连发
-                    nes.keyboard.setNESKeyBord(0,0x40)
+                    // nes.keyboard.setNESKeyBord(0,0x40)
+                    holdNes.nes.buttonUp(1,0)
 
                 }
                 if(i === _tubB){
                     //B键连发
-                    nes.keyboard.setNESKeyBord(1,0x40)
+                    // nes.keyboard.setNESKeyBord(1,0x40)
+                    holdNes.nes.buttonUp(1,1)
 
                 }
 
@@ -132,9 +140,11 @@ function gameLoop() {
 
 
 async function tubrro(key) {
-    nes.keyboard.setNESKeyBord(key,0x41);
+    // nes.keyboard.setNESKeyBord(key,0x41);
+    holdNes.nes.buttonDown(1,key)
     setTimeout(()=>{
-        nes.keyboard.setNESKeyBord(key,0x40)
+        // nes.keyboard.setNESKeyBord(key,0x40)
+        holdNes.nes.buttonUp(1,key)
     })
 
 }
