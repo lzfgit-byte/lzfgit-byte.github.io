@@ -1,6 +1,6 @@
 import {data} from '../data.js'
 import {holdNes} from "../source/initnes.js";
-import {romsData} from "../source/ui.js";
+import {romsData} from "../source/romUrl.js";
 
 window.holdNes = holdNes;
 let indexObj = {
