@@ -61,7 +61,7 @@
 <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
 <script src="js/initDog.js"></script>
 <script src="layui/layui.js"></script>
-<script src="lib/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="lib/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="js/util.js"></script>
 
 
@@ -69,7 +69,11 @@
 
 
 <!--fc-->
-<div id="emulator" style="display: none;text-align: center;"></div>
+<DIV ID="emulator" style="display: none;text-align: center;">
+    <canvas id="nes-canvas" width="256" height="240"></canvas>
+</DIV>
+
+
 <div id="roms" class="layui-form" style="display: none">
     <form class="layui-form" action="">
         <div class="layui-form-item">
@@ -83,17 +87,11 @@
 
 
 <script src="lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/nes.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/utils.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/cpu.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/keyboard.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/mappers.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/papu.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/ppu.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/rom.js" type="text/javascript" charset="utf-8"></script>
-<script src="source/ui.js" type="text/javascript" charset="utf-8"></script>
+
+<!--<script type="text/javascript" src="https://unpkg.com/jsnes/dist/jsnes.min.js"></script>-->
+
 <script src="source/gamepad.js" type="module" charset="utf-8"></script>
-<script src="source/initnes.js" type="text/javascript" charset="utf-8"></script>
+<script src="source/initnes.js" type="module" charset="utf-8"></script>
 <!--[if IE]>
 <script type="text/vbscript" src="source/jsnes-ie-hacks.vbscript"></script>
 <![endif]-->

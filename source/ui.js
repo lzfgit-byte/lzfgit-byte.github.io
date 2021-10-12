@@ -1,338 +1,75 @@
-/*
-JSNES, based on Jamie Sanders' vNES
-Copyright (C) 2010 Ben Firshman
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-JSNES.DummyUI = function(nes) {
-    this.nes = nes;
-    this.enable = function() {};
-    this.updateStatus = function() {};
-    this.writeAudio = function() {};
-    this.writeFrame = function() {};
-};
-
-if (typeof jQuery !== 'undefined') {
-    (function($) {
-        $.fn.JSNESUI = function(roms) {
-            var parent = this;
-            var UI = function(nes) {
-                var self = this;
-                self.nes = nes;
-                
-                /*
-                 * Create UI
-                 */
-                self.root = $('<div></div>');
-                self.screen = $('<canvas class="nes-screen" width="256" height="240"></canvas>').appendTo(self.root);
-                
-                if (!self.screen[0].getContext) {
-                    parent.html("Your browser doesn't support the <code>&lt;canvas&gt;</code> tag. Try Google Chrome, Safari, Opera or Firefox!");
-                    return;
-                }
-                
-                self.romContainer = $('<div class="nes-roms" style="display: none"></div>').appendTo(self.root);
-                self.romSelect = $('<select></select>').appendTo(self.romContainer);
-                
-                self.controls = $('<div class="nes-controls" style="display: none"></div>').appendTo(self.root);
-                self.buttons = {
-                    pause: $('<input type="button" value="暂停" class="nes-pause" disabled="disabled">').appendTo(self.controls),
-                    restart: $('<input type="button" value="重新开始" class="nes-restart" disabled="disabled">').appendTo(self.controls),
-                    sound: $('<input type="button" value="打开声音" class="nes-enablesound">').appendTo(self.controls),
-                    zoom: $('<input type="button"  value="放大" class="nes-zoom">').appendTo(self.controls)
-                };
-                self.status = $('<p class="nes-status">Booting up...</p>').appendTo(self.root);
-                self.root.appendTo(parent);
-                
-                /*
-                 * ROM loading
-                 */
-                self.romSelect.change(function() {
-                    self.loadROM();
-                });
-                
-                /*
-                 * Buttons
-                 */
-                self.buttons.pause.click(function() {
-                    if (self.nes.isRunning) {
-                        self.nes.stop();
-                        self.updateStatus("Paused");
-                        self.buttons.pause.attr("value", "继续");
-                    }
-                    else {
-                        self.nes.start();
-                        self.buttons.pause.attr("value", "暂停");
-                    }
-                });
-        
-                self.buttons.restart.click(function() {
-                    self.nes.reloadRom();
-                    self.nes.start();
-                });
-        
-                self.buttons.sound.click(function() {
-                    if (self.nes.opts.emulateSound) {
-                        self.nes.opts.emulateSound = false;
-                        self.buttons.sound.attr("value", "打开声音");
-                    }
-                    else {
-                        self.nes.opts.emulateSound = true;
-                        self.buttons.sound.attr("value", "关闭声音");
-                    }
-                });
-        
-                self.zoomed = false;
-                self.buttons.zoom.click(function() {
-                    if (self.zoomed) {
-                        self.screen.animate({
-                            width: '256px',
-                            height: '240px'
-                        });
-                        self.buttons.zoom.attr("value", "放大");
-                        self.zoomed = false;
-                    }
-                    else {
-                        self.screen.animate({
-                            width: '512px',
-                            height: '480px'
-                        });
-                        self.buttons.zoom.attr("value", "缩小");
-                        self.zoomed = true;
-                    }
-                });
-                
-                /*
-                 * Lightgun experiments with mouse
-                 * (Requires jquery.dimensions.js)
-                 */
-                if ($.offset) {
-                    self.screen.mousedown(function(e) {
-                        if (self.nes.mmap) {
-                            self.nes.mmap.mousePressed = true;
-                            // FIXME: does not take into account zoom
-                            self.nes.mmap.mouseX = e.pageX - self.screen.offset().left;
-                            self.nes.mmap.mouseY = e.pageY - self.screen.offset().top;
-                        }
-                    }).mouseup(function() {
-                        setTimeout(function() {
-                            if (self.nes.mmap) {
-                                self.nes.mmap.mousePressed = false;
-                                self.nes.mmap.mouseX = 0;
-                                self.nes.mmap.mouseY = 0;
-                            }
-                        }, 500);
-                    });
-                }
-            
-                if (typeof roms != 'undefined') {
-                    self.setRoms(roms);
-                }
-            
-                /*
-                 * Canvas
-                 */
-                self.canvasContext = self.screen[0].getContext('2d');
-                
-                if (!self.canvasContext.getImageData) {
-                    parent.html("Your browser doesn't support writing pixels directly to the <code>&lt;canvas&gt;</code> tag. Try the latest versions of Google Chrome, Safari, Opera or Firefox!");
-                    return;
-                }
-                
-                self.canvasImageData = self.canvasContext.getImageData(0, 0, 256, 240);
-                self.resetCanvas();
-            
-                /*
-                 * Keyboard
-                 */
-                $(document).
-                    bind('keydown', function(evt) {
-                        self.nes.keyboard.keyDown(evt); 
-                    }).
-                    bind('keyup', function(evt) {
-                        self.nes.keyboard.keyUp(evt); 
-                    }).
-                    bind('keypress', function(evt) {
-                        self.nes.keyboard.keyPress(evt);
-                    });
-            
-                /*
-                 * Sound
-                 */
-                self.dynamicaudio = new DynamicAudio({
-                    swf: nes.opts.swfPath+'dynamicaudio.swf'
-                });
-            };
-        
-            UI.prototype = {    
-                loadROM: function() {
-                    var self = this;
-                    self.updateStatus("Downloading...");
-                    $.ajax({
-                        url: encodeURIComponent(self.romSelect.val()),
-                        xhr: function() {
-                            var xhr = $.ajaxSettings.xhr();
-                            if (typeof xhr.overrideMimeType !== 'undefined') {
-                                // Download as binary
-                                xhr.overrideMimeType('text/plain; charset=x-user-defined');
-                            }
-                            self.xhr = xhr;
-                            return xhr;
-                        },
-                        complete: function(xhr, status) {
-                            var i, data;
-                            if (JSNES.Utils.isIE()) {
-                                var charCodes = JSNESBinaryToArray(
-                                    xhr.responseBody
-                                ).toArray();
-                                data = String.fromCharCode.apply(
-                                    undefined, 
-                                    charCodes
-                                );
-                            }
-                            else {
-                                data = xhr.responseText;
-                            }
-                            self.nes.loadRom(data);
-                            self.nes.start();
-                            self.enable();
-                        }
-                    });
-                },
-                loadROM: function(srcUrl) {
-                    var self = this;
-                    self.updateStatus("Downloading...");
-                    $.ajax({
-                        url: encodeURIComponent(srcUrl),
-                        xhr: function() {
-                            var xhr = $.ajaxSettings.xhr();
-                            if (typeof xhr.overrideMimeType !== 'undefined') {
-                                // Download as binary
-                                xhr.overrideMimeType('text/plain; charset=x-user-defined');
-                            }
-                            self.xhr = xhr;
-                            return xhr;
-                        },
-                        complete: function(xhr, status) {
-                            var i, data;
-                            if (JSNES.Utils.isIE()) {
-                                var charCodes = JSNESBinaryToArray(
-                                    xhr.responseBody
-                                ).toArray();
-                                data = String.fromCharCode.apply(
-                                    undefined,
-                                    charCodes
-                                );
-                            }
-                            else {
-                                data = xhr.responseText;
-                            }
-                            self.nes.loadRom(data);
-                            self.nes.start();
-                            self.enable();
-                        }
-                    });
-                },
-                resetCanvas: function() {
-                    this.canvasContext.fillStyle = 'black';
-                    // set alpha to opaque
-                    this.canvasContext.fillRect(0, 0, 256, 240);
-
-                    // Set alpha
-                    for (var i = 3; i < this.canvasImageData.data.length-3; i += 4) {
-                        this.canvasImageData.data[i] = 0xFF;
-                    }
-                },
-                
-                /*
-                *
-                * nes.ui.screenshot() --> return <img> element :)
-                */
-                screenshot: function() {
-                    var data = this.screen[0].toDataURL("image/png"),
-                        img = new Image();
-                    img.src = data;
-                    return img;
-                },
-                
-                /*
-                 * Enable and reset UI elements
-                 */
-                enable: function() {
-                    this.buttons.pause.attr("disabled", null);
-                    if (this.nes.isRunning) {
-                        this.buttons.pause.attr("value", "暂停");
-                    }
-                    else {
-                        this.buttons.pause.attr("value", "继续");
-                    }
-                    this.buttons.restart.attr("disabled", null);
-                    if (this.nes.opts.emulateSound) {
-                        this.buttons.sound.attr("value", "关闭声音");
-                    }
-                    else {
-                        this.buttons.sound.attr("value", "打开声音");
-                    }
-                },
-            
-                updateStatus: function(s) {
-                    this.status.text(s);
-                },
-        
-                setRoms: function(roms) {
-                    this.romSelect.children().remove();
-                    $("<option>选择游戏...</option>").appendTo(this.romSelect);
-                    for (var groupName in roms) {
-                        if (roms.hasOwnProperty(groupName)) {
-                            var optgroup = $('<optgroup></optgroup>').
-                                attr("label", groupName);
-                            for (var i = 0; i < roms[groupName].length; i++) {
-                                $('<option>'+roms[groupName][i][0]+'</option>')
-                                    .attr("value", roms[groupName][i][1])
-                                    .appendTo(optgroup);
-                            }
-                            this.romSelect.append(optgroup);
-                        }
-                    }
-                },
-            
-                writeAudio: function(samples) {
-                    return this.dynamicaudio.writeInt(samples);
-                },
-            
-                writeFrame: function(buffer, prevBuffer) {
-                    var imageData = this.canvasImageData.data;
-                    var pixel, i, j;
-
-                    for (i=0; i<256*240; i++) {
-                        pixel = buffer[i];
-
-                        if (pixel != prevBuffer[i]) {
-                            j = i*4;
-                            imageData[j] = pixel & 0xFF;
-                            imageData[j+1] = (pixel >> 8) & 0xFF;
-                            imageData[j+2] = (pixel >> 16) & 0xFF;
-                            prevBuffer[i] = pixel;
-                        }
-                    }
-
-                    this.canvasContext.putImageData(this.canvasImageData, 0, 0);
-                }
-            };
-        
-            return UI;
+let romsData = {
+            "魂斗罗": [
+                ['魂斗罗1(U)30', 'roms/Contra/Contra1(U)30.nes'],
+                ['魂斗罗1(U)30F', 'roms/Contra/Contra1(U)30F.nes'],
+                ['魂斗罗1(U)30L', 'roms/Contra/Contra1(U)30L.nes'],
+                ['魂斗罗1(U)30M', 'roms/Contra/Contra1(U)30M.nes'],
+                ['魂斗罗1(U)30S', 'roms/Contra/Contra1(U)30S.nes'],
+                ['魂斗罗1(U)F', 'roms/Contra/Contra1(U)F.nes'],
+                ['魂斗罗1(U)L', 'roms/Contra/Contra1(U)L.nes'],
+                ['魂斗罗1(U)M', 'roms/Contra/Contra1(U)M.nes'],
+                ['魂斗罗1(U)S', 'roms/Contra/Contra1(U)S.nes'],
+            ],
+            "超级玛丽": [
+                ['超级马里奥1 (W) Super Mario Bros. [!]', 'roms/rom1/(W) Super Mario Bros. [!].nes'],
+                ['超级马里奥2 (W) Super Mario Bros. 3 (U)', 'roms/bfirsh/Super Mario Bros. 3 (U) (PRG1) [!].nes'],
+                ['马里奥拆屋工 (W) Wrecking Crew [!]', 'roms/rom1/(W) Wrecking Crew [!].nes'],
+                ['马里奥医生 Dr. Mario (JU)', 'roms/bfirsh/Dr. Mario (JU).nes'],
+            ],
+            "双截龙": [
+                ['双截龙1 Double Dragon1', 'roms/Double Dragon/Double Dragon1.nes'],
+                ['双截龙2 Double Dragon2', 'roms/Double Dragon/Double Dragon2.nes'],
+                ['双截龙3 Double Dragon3', 'roms/Double Dragon/Double Dragon3.nes'],
+                ['双截龙4 Double Dragon4', 'roms/Double Dragon/Double Dragon4.nes'],
+            ],
+            "坦克": [
+                ['坦克 (Ch) Missile Tank', 'roms/rom1/(Ch) Missile Tank.nes'],
+                ['坦克 (Ch) Tank 1990', 'roms/rom1/(Ch) Tank 1990.nes'],
+                ['坦克 (J) Battle City', 'roms/rom1/(J) Battle City.nes'],
+            ],
+            "经典": [
+                ['赤影战士 Kage', 'roms/other/Kage.nes'],
+                ['中国象棋', 'roms/other/Zhong Guo Xiang Qi.nes'],
+                ['吃豆精灵 (J) (V1.1) Pac-Man [!]', 'roms/other/Pac-Man.nes'],
+                ['摩托车大赛 (J) (PRG1) Mach Rider [!]', 'roms/other/Mach Rider.nes'],
+                ['沙罗曼蛇 (U) Life Force', 'roms/rom2/Life Force [!].nes'],
+                ['1943 (U) 1943 - The Battle of Midway', 'roms/rom2/1943.nes'],
+                ['脱狱 Cross Fire (J)', 'roms/rom2/Cross Fire (J).nes'],
+                ['撞球咖啡馆 Shufflepuck Cafe', 'roms/rom2/Shufflepuck Cafe.nes'],
+                ['功夫 (J) (V1.2) Yie Ar Kung-Fu [!]', 'roms/rom1/(J) (V1.2) Yie Ar Kung-Fu [!].nes'],
+            ],
+            "淘金者": [
+                ['淘金者(汉化)', 'roms/rom1/TaoJinZhe.nes'],
+                ['淘金者(J)', 'roms/rom1/Championship Lode Runner (J).nes'],
+            ],
+            "俄罗斯方块": [
+                ['俄罗斯方块LJ65', 'roms/lj65/lj65.nes'],
+                ['俄罗斯方块Tetris(U)', 'roms/other/Tetris (U) [!].nes'],
+                ['俄罗斯方块Tetris 2(U)', 'roms/other/Tetris 2 (U) [!].nes'],
+            ],
+            "赛车": [
+                ['F1赛车 (J) F-1 Race [!]', 'roms/rom1/(J) F-1 Race [!].nes'],
+                ['摩托车大赛 (JU) (PRG0) Mach Rider [!]', 'roms/rom1/(JU) (PRG0) Mach Rider [!].nes'],
+                ['越野机车 (JU) Excitebike [!]', 'roms/rom1/(JU) Excitebike [!].nes'],
+                ['火箭车 (J) Road Fighter [!]', 'roms/rom1/(J) Road Fighter [!].nes'],
+            ],
+            "1981": [
+                ['五子棋 (5) 日版', 'roms/1981/5.nes'],
+            ],
+            "其它": [
+                ['泡泡 Bubble Bobble (U)', 'roms/bfirsh/Bubble Bobble (U).nes'],
+                ['Concentration Room', 'roms/croom/croom.nes'],
+                ['网球Tennis(JU)', 'roms/other/Tennis (JU) [!].nes'],
+                ['高尔夫 Golf (JU)', 'roms/bfirsh/Golf (JU).nes'],
+                ['Zelda II - The Adventure of Link(U)', 'roms/other/Zelda II - The Adventure of Link (U).nes'],
+                ['地底探险1 (J) Spelunker [!]', 'roms/rom1/(J) Spelunker [!].nes'],
+                ['快乐猫 (J) Mappy [!]', 'roms/rom1/(J) Mappy [!].nes'],
+                ['成龙踢馆1 (J) Spartan X [!]', 'roms/rom1/(J) Spartan X [!].nes'],
+                ['敲冰块 (J) Ice Climber', 'roms/rom1/(J) Ice Climber.nes'],
+                ['炸弹人1 (J) Bomberman [!]', 'roms/rom1/(J) Bomberman [!].nes'],
+                ['猪小弟 (J) Pooyan', 'roms/rom1/(J) Pooyan.nes'],
+                ['马戏团 (J) Circus Charlie [!]', 'roms/rom1/(J) Circus Charlie [!].nes'],
+            ],
         };
-    })(jQuery);
-}
+
+export {romsData};

@@ -1,5 +1,8 @@
 import {data} from '../data.js'
+import {holdNes} from "../source/initnes.js";
+import {romsData} from "../source/ui.js";
 
+window.holdNes = holdNes;
 let indexObj = {
     $:layui.jquery,
     bind:function () {
@@ -78,6 +81,10 @@ let indexObj = {
         $this.show();
     },
     setFc:function () {
+        if(!holdNes.alerdSet){
+            holdNes.alerdSet = true;
+            holdNes.nes_load_url("nes-canvas",'roms/Contra/Contra1(U)30.nes');
+        }
         let multiple = 1.7;
         let index = layui.layer.open({
             type: 1,
@@ -86,7 +93,7 @@ let indexObj = {
             content: $('#emulator'),
             maxmin: true,
             end:function () {
-                nes.stop()
+                holdNes.audio_ctx.suspend();
                 layui.layer.closeAll();
                 $('#emulator').hide();
                 $('#roms').hide();
@@ -100,23 +107,23 @@ let indexObj = {
 
                 let trueMult = Math.min(multiple1,multiple2)-0.1;
 
-                nes.ui.screen.animate({
+                holdNes.screen.animate({
                     width: `${512*trueMult}px`,
                     height: `${480*trueMult}px`
                 },0);
             },
             success:function () {
-                nes.ui.screen.animate({
+                holdNes.screen.animate({
                     width: `${512*multiple}px`,
                     height: `${480*multiple}px`
                 });
                 let status = $('.layui-layer-title');
-                if(status.length > 0){
-                    let text = nes.ui.status.text();
-                    nes.ui.status.remove();
-                    nes.ui.status = $('.layui-layer-title');
-                    nes.ui.status.text(text);
-                }
+                // if(status.length > 0){
+                //     let text = nes.ui.status.text();
+                //     nes.ui.status.remove();
+                //     nes.ui.status = $('.layui-layer-title');
+                //     nes.ui.status.text(text);
+                // }
 
 
                 layui.layer.open({
@@ -126,17 +133,40 @@ let indexObj = {
                     content: $('#roms'),
                     shade: 0,
                     success:function () {
-                        let romDom = $('.nes-roms select');
 
-                        $('#romsOption').html(romDom.html())
-
+                        let $select = $('#romsOption');
+                        let roms = romsData;
+                        $("<option>选择游戏...</option>").appendTo($select);
+                        for (var groupName in roms) {
+                            if (roms.hasOwnProperty(groupName)) {
+                                var optgroup = $('<optgroup></optgroup>').
+                                attr("label", groupName);
+                                for (var i = 0; i < roms[groupName].length; i++) {
+                                    $('<option>'+roms[groupName][i][0]+'</option>')
+                                        .attr("value", roms[groupName][i][1])
+                                        .appendTo(optgroup);
+                                }
+                                $select.append(optgroup);
+                            }
+                        }
 
                         layui.form.render()
                         layui.form.on('select(romsOption)', function(data){
-                            console.log(data.elem); //得到select原始DOM对象
-                            console.log(data.value); //得到被选中的值
-                            console.log(data.othis); //得到美化后的DOM对象
-                            nes.ui.loadROM(data.value)
+                            var req = new XMLHttpRequest();
+                            req.open("GET", data.value);
+                            req.overrideMimeType("text/plain; charset=x-user-defined");
+                            req.onerror = () => console.log(`Error loading ${data.value}: ${req.statusText}`);
+                            req.onload = function () {
+                                if (this.status === 200) {
+                                    holdNes.nes.loadROM(this.responseText);
+                                } else if (this.status === 0) {
+                                    // Aborted, so ignore error
+                                } else {
+                                    req.onerror();
+                                }
+                            };
+                            req.send();
+
                         });
                     }
                 })

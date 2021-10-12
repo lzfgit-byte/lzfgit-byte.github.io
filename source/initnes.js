@@ -1,79 +1,176 @@
-var nes;
-$(function() {
-    nes = new JSNES({
-        emulateSound:true,
-        'ui': $('#emulator').JSNESUI({
-            "魂斗罗": [
-                ['魂斗罗1(U)30', 'roms/Contra/Contra1(U)30.nes'],
-                ['魂斗罗1(U)30F', 'roms/Contra/Contra1(U)30F.nes'],
-                ['魂斗罗1(U)30L', 'roms/Contra/Contra1(U)30L.nes'],
-                ['魂斗罗1(U)30M', 'roms/Contra/Contra1(U)30M.nes'],
-                ['魂斗罗1(U)30S', 'roms/Contra/Contra1(U)30S.nes'],
-                ['魂斗罗1(U)F', 'roms/Contra/Contra1(U)F.nes'],
-                ['魂斗罗1(U)L', 'roms/Contra/Contra1(U)L.nes'],
-                ['魂斗罗1(U)M', 'roms/Contra/Contra1(U)M.nes'],
-                ['魂斗罗1(U)S', 'roms/Contra/Contra1(U)S.nes'],
-            ],
-            "超级玛丽": [
-                ['超级马里奥1 (W) Super Mario Bros. [!]', 'roms/rom1/(W) Super Mario Bros. [!].nes'],
-                ['超级马里奥2 (W) Super Mario Bros. 3 (U)', 'roms/bfirsh/Super Mario Bros. 3 (U) (PRG1) [!].nes'],
-                ['马里奥拆屋工 (W) Wrecking Crew [!]', 'roms/rom1/(W) Wrecking Crew [!].nes'],
-                ['马里奥医生 Dr. Mario (JU)', 'roms/bfirsh/Dr. Mario (JU).nes'],
-            ],
-            "双截龙": [
-                ['双截龙1 Double Dragon1', 'roms/Double Dragon/Double Dragon1.nes'],
-                ['双截龙2 Double Dragon2', 'roms/Double Dragon/Double Dragon2.nes'],
-                ['双截龙3 Double Dragon3', 'roms/Double Dragon/Double Dragon3.nes'],
-                ['双截龙4 Double Dragon4', 'roms/Double Dragon/Double Dragon4.nes'],
-            ],
-            "坦克": [
-                ['坦克 (Ch) Missile Tank', 'roms/rom1/(Ch) Missile Tank.nes'],
-                ['坦克 (Ch) Tank 1990', 'roms/rom1/(Ch) Tank 1990.nes'],
-                ['坦克 (J) Battle City', 'roms/rom1/(J) Battle City.nes'],
-            ],
-            "经典": [
-                ['赤影战士 Kage', 'roms/other/Kage.nes'],
-                ['中国象棋', 'roms/other/Zhong Guo Xiang Qi.nes'],
-                ['吃豆精灵 (J) (V1.1) Pac-Man [!]', 'roms/other/Pac-Man.nes'],
-                ['摩托车大赛 (J) (PRG1) Mach Rider [!]', 'roms/other/Mach Rider.nes'],
-                ['沙罗曼蛇 (U) Life Force', 'roms/rom2/Life Force [!].nes'],
-                ['1943 (U) 1943 - The Battle of Midway', 'roms/rom2/1943.nes'],
-                ['脱狱 Cross Fire (J)', 'roms/rom2/Cross Fire (J).nes'],
-                ['撞球咖啡馆 Shufflepuck Cafe', 'roms/rom2/Shufflepuck Cafe.nes'],
-                ['功夫 (J) (V1.2) Yie Ar Kung-Fu [!]', 'roms/rom1/(J) (V1.2) Yie Ar Kung-Fu [!].nes'],
-            ],
-            "淘金者": [
-                ['淘金者(汉化)', 'roms/rom1/TaoJinZhe.nes'],
-                ['淘金者(J)', 'roms/rom1/Championship Lode Runner (J).nes'],
-            ],
-            "俄罗斯方块": [
-                ['俄罗斯方块LJ65', 'roms/lj65/lj65.nes'],
-                ['俄罗斯方块Tetris(U)', 'roms/other/Tetris (U) [!].nes'],
-                ['俄罗斯方块Tetris 2(U)', 'roms/other/Tetris 2 (U) [!].nes'],
-            ],
-            "赛车": [
-                ['F1赛车 (J) F-1 Race [!]', 'roms/rom1/(J) F-1 Race [!].nes'],
-                ['摩托车大赛 (JU) (PRG0) Mach Rider [!]', 'roms/rom1/(JU) (PRG0) Mach Rider [!].nes'],
-                ['越野机车 (JU) Excitebike [!]', 'roms/rom1/(JU) Excitebike [!].nes'],
-                ['火箭车 (J) Road Fighter [!]', 'roms/rom1/(J) Road Fighter [!].nes'],
-            ],
-            "1981": [
-                ['五子棋 (5) 日版', 'roms/1981/5.nes'],
-            ],
-            "其它": [
-                ['泡泡 Bubble Bobble (U)', 'roms/bfirsh/Bubble Bobble (U).nes'],
-                ['Concentration Room', 'roms/croom/croom.nes'],
-                ['网球Tennis(JU)', 'roms/other/Tennis (JU) [!].nes'],
-                ['高尔夫 Golf (JU)', 'roms/bfirsh/Golf (JU).nes'],
-                ['Zelda II - The Adventure of Link(U)', 'roms/other/Zelda II - The Adventure of Link (U).nes'],
-                ['地底探险1 (J) Spelunker [!]', 'roms/rom1/(J) Spelunker [!].nes'],
-                ['快乐猫 (J) Mappy [!]', 'roms/rom1/(J) Mappy [!].nes'],
-                ['成龙踢馆1 (J) Spartan X [!]', 'roms/rom1/(J) Spartan X [!].nes'],
-                ['敲冰块 (J) Ice Climber', 'roms/rom1/(J) Ice Climber.nes'],
-                ['炸弹人1 (J) Bomberman [!]', 'roms/rom1/(J) Bomberman [!].nes'],
-                ['猪小弟 (J) Pooyan', 'roms/rom1/(J) Pooyan.nes'],
-                ['马戏团 (J) Circus Charlie [!]', 'roms/rom1/(J) Circus Charlie [!].nes'],
-            ],
-        })
-    });
+import {jsnes} from "./index.js";
+
+let holdNes = {};
+var SCREEN_WIDTH = 256;
+var SCREEN_HEIGHT = 240;
+var FRAMEBUFFER_SIZE = SCREEN_WIDTH * SCREEN_HEIGHT;
+
+var canvas_ctx, image;
+var framebuffer_u8, framebuffer_u32;
+
+var AUDIO_BUFFERING = 512;
+var SAMPLE_COUNT = 4 * 1024;
+var SAMPLE_MASK = SAMPLE_COUNT - 1;
+var audio_samples_L = new Float32Array(SAMPLE_COUNT);
+var audio_samples_R = new Float32Array(SAMPLE_COUNT);
+var audio_write_cursor = 0, audio_read_cursor = 0;
+
+var nes = new jsnes.NES({
+    onFrame: function (framebuffer_24) {
+        for (var i = 0; i < FRAMEBUFFER_SIZE; i++) framebuffer_u32[i] = 0xFF000000 | framebuffer_24[i];
+    },
+    onAudioSample: function (l, r) {
+        audio_samples_L[audio_write_cursor] = l;
+        audio_samples_R[audio_write_cursor] = r;
+        audio_write_cursor = (audio_write_cursor + 1) & SAMPLE_MASK;
+    },
 });
+
+holdNes.nes = nes;
+
+//浏览器更新页面时的回调
+function onAnimationFrame() {
+    window.requestAnimationFrame(onAnimationFrame);
+
+    image.data.set(framebuffer_u8);
+    canvas_ctx.putImageData(image, 0, 0);
+}
+
+function audio_remain() {
+    return (audio_write_cursor - audio_read_cursor) & SAMPLE_MASK;
+}
+
+function audio_callback(event) {
+    var dst = event.outputBuffer;
+    var len = dst.length;
+
+    // Attempt to avoid buffer underruns.
+    if (audio_remain() < AUDIO_BUFFERING) nes.frame();
+
+    var dst_l = dst.getChannelData(0);
+    var dst_r = dst.getChannelData(1);
+    for (var i = 0; i < len; i++) {
+        var src_idx = (audio_read_cursor + i) & SAMPLE_MASK;
+        dst_l[i] = audio_samples_L[src_idx];
+        dst_r[i] = audio_samples_R[src_idx];
+    }
+
+    audio_read_cursor = (audio_read_cursor + len) & SAMPLE_MASK;
+}
+
+function keyboard(callback, event) {
+    var player = 1;
+    switch (event.keyCode) {
+        case 38: // UP
+            callback(player, jsnes.Controller.BUTTON_UP);
+            break;
+        case 40: // Down
+            callback(player, jsnes.Controller.BUTTON_DOWN);
+            break;
+        case 37: // Left
+            callback(player, jsnes.Controller.BUTTON_LEFT);
+            break;
+        case 39: // Right
+            callback(player, jsnes.Controller.BUTTON_RIGHT);
+            break;
+        case 65: // 'a' - qwerty, dvorak
+        case 81: // 'q' - azerty
+            callback(player, jsnes.Controller.BUTTON_A);
+            break;
+        case 83: // 's' - qwerty, azerty
+        case 79: // 'o' - dvorak
+            callback(player, jsnes.Controller.BUTTON_B);
+            break;
+        case 9: // Tab
+            callback(player, jsnes.Controller.BUTTON_SELECT);
+            break;
+        case 13: // Return
+            callback(player, jsnes.Controller.BUTTON_START);
+            break;
+        default:
+            break;
+    }
+}
+
+function nes_init(canvas_id) {
+    var canvas = document.getElementById(canvas_id);
+
+    canvas_ctx = canvas.getContext("2d");
+    image = canvas_ctx.getImageData(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    canvas_ctx.fillStyle = "black";
+    canvas_ctx.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    // Allocate framebuffer array.
+    var buffer = new ArrayBuffer(image.data.length);
+    framebuffer_u8 = new Uint8ClampedArray(buffer);
+    framebuffer_u32 = new Uint32Array(buffer);
+
+    // Setup audio.
+    var AudioContext = window.AudioContext || window.webkitAudioContext || false;
+    var audio_ctx;
+    if (AudioContext) {
+        audio_ctx = new AudioContext({sampleRate: nes.papu.sampleRate});
+    }
+    audio_ctx.resume();
+    var script_processor = audio_ctx.createScriptProcessor(AUDIO_BUFFERING, 0, 2);
+    script_processor.onaudioprocess = audio_callback;
+    script_processor.connect(audio_ctx.destination);
+
+    holdNes.audio_ctx = audio_ctx;
+    holdNes.screen = $(canvas);
+    // document.documentElement.addEventListener(
+    //     "mousedown", function () {
+    //         if (audio_ctx.state !== 'running') {
+    //             audio_ctx.resume();
+    //         }
+    //     });
+    //
+    // document.documentElement.addEventListener(
+    //     "keydown", function () {
+    //         if (audio_ctx.state !== 'running') {
+    //             audio_ctx.resume();
+    //         }
+    //     });
+}
+
+function nes_boot(rom_data) {
+    nes.loadROM(rom_data);
+    window.requestAnimationFrame(onAnimationFrame);
+}
+
+function nes_load_data(canvas_id, rom_data) {
+    nes_init(canvas_id);
+    nes_boot(rom_data);
+}
+
+function nes_load_url(canvas_id, path) {
+    nes_init(canvas_id);
+
+    var req = new XMLHttpRequest();
+    req.open("GET", path);
+    req.overrideMimeType("text/plain; charset=x-user-defined");
+    req.onerror = () => console.log(`Error loading ${path}: ${req.statusText}`);
+
+    req.onload = function () {
+        if (this.status === 200) {
+            nes_boot(this.responseText);
+        } else if (this.status === 0) {
+            // Aborted, so ignore error
+        } else {
+            req.onerror();
+        }
+    };
+    req.send();
+}
+holdNes.nes_load_url = nes_load_url;
+holdNes.alerdSet = false;
+document.addEventListener('keydown', (event) => {
+    keyboard(nes.buttonDown, event)
+});
+document.addEventListener('keyup', (event) => {
+    keyboard(nes.buttonUp, event)
+});
+// holdNes.nes.reloadROM()
+//holdNes.audio_ctx.suspend();resume
+export {holdNes};
