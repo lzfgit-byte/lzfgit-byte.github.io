@@ -6,18 +6,7 @@ import {gamePadApi} from "../source/gamepad.js";
 window.holdNes = holdNes;
 
 // window.keyjson = {};
-window.document.addEventListener("keydown",function (event) {
-    if(event.code == "F12"){
-        // window.keyjson[event.keyCode] = event.code;
-        // return true;
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
-    }
-    // window.keyjson[event.keyCode] = event.code;
-    // event.preventDefault();
-    // event.stopPropagation();
-})
+
 var indexObj = {
     $: layui.jquery,
     bind: function () {
