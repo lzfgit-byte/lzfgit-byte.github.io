@@ -245,6 +245,7 @@ var indexObj = {
         // layer.full(index);
     }
     , initContentMenu: function () {
+        window.f12Flag = true;
         var inst = layui.dropdown.render({
             elem: document //也可绑定到 document，从而重置整个右键
             , trigger: 'contextmenu' //contextmenu
