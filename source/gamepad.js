@@ -80,6 +80,9 @@ kesA[_tubB] = "KEY_BB"
 }()
 let pressKey = [];
 let keyPress;
+window.canSet = undefined;
+window.canSetValue = undefined;
+
 function gameLoop() {
     var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
     if (!gamepads) return;
@@ -100,6 +103,10 @@ function gameLoop() {
                 //触发按下
                 console.log(`按下了${kesA[i]}`)
                 keyPress = i;
+                if(canSet !== undefined){
+                    gamePadApi.setGamePad(canSetValue)
+                    window.setGamePadCall(keyPress);
+                }
                 // nes.keyboard.setNESKeyBord(keys[kesA[i]],0x41)
                 holdNes.nes.buttonDown(1,keys[kesA[i]])
                 pressKey[pressKey.length] = i;
@@ -158,7 +165,6 @@ let gamePadApi = {
     },
     setGamePad:function (value,callback) {
         kesA[keyPress] = value;
-        callback(keyPress);
     }
 }
 

@@ -61,7 +61,7 @@ function audio_callback(event) {
 }
 let player1Set = {BUTTON_A:222,BUTTON_B:186,BUTTON_SELECT:32,BUTTON_START:13,BUTTON_UP:87,BUTTON_DOWN:83,BUTTON_LEFT:65,BUTTON_RIGHT:68}
 let player2Set = {BUTTON_A:97,BUTTON_B:98,BUTTON_SELECT:100,BUTTON_START:101,BUTTON_UP:38,BUTTON_DOWN:40,BUTTON_LEFT:37,BUTTON_RIGHT:39}
-let nesSet = {reSet:80,PauseAndStart:52}
+let nesSet = {reSet:80,PauseAndStart:82}
 ;!function(){
     let temp = localStorage.getItem("player1Set");;
     player1Set = temp != null && temp ? JSON.parse(temp):player1Set;

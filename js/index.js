@@ -192,50 +192,7 @@ var indexObj = {
                     content: $('#sets'),
                     shade: 0,
                     success: function () {
-                        let $form = $("#setForm");
-                        let player1Set = holdNes.player1Set;
-                        let sets = "";
-                        for (let key in player1Set) {
-                            sets += ` <div class="layui-form-item">
-                                            <label class="layui-form-label" style="width: 148px">${key}</label>
-                                            <div class="layui-input-inline" style="width: 122px">
-                                                <input type="text" keySet="${key}" onkeydown="chaneThis(1,this);" name="title" value="${player1Set[key] + " " +romsData.keyMap[player1Set[key]]}" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                                            </div>
-                                            </div>`
-                        }
-                        $form.html(sets);
-
-                        $form = $("#setForm2");
-                        let player2Set = holdNes.player2Set;
-                        sets = "";
-                        for (let key in player2Set) {
-                            sets += ` <div class="layui-form-item">
-                                            <label class="layui-form-label" style="width: 148px">${key}</label>
-                                            <div class="layui-input-inline" style="width: 122px">
-                                                <input type="text" keySet="${key}" onkeydown="chaneThis(2,this);" name="title" value="${player2Set[key] + " " +romsData.keyMap[player2Set[key]]}" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                                            </div>
-                                            </div>`
-                        }
-                        $form.html(sets);
-
-                        $form = $("#setForm3");
-                        let gamePad = gamePadApi.kesPad;
-                        sets = "";
-                        for (let key in gamePad) {
-                            sets += ` <div class="layui-form-item">
-                                            <label class="layui-form-label" style="width: 148px">${gamePad[key]}</label>
-                                            <div class="layui-input-inline" style="width: 122px">
-                                                <input type="text" keySet="${gamePad[key]}" onfocus="focusThis(this);" name="title" value="${key}" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                                            </div>
-                                            </div>`
-                        }
-                        $form.html(sets);
-
-
-
-
-                        layui.form.render()
-
+                        indexObj.initSetForm();
                     }
 
                 })
@@ -243,6 +200,51 @@ var indexObj = {
         });
 
         // layer.full(index);
+    },
+    initSetForm:function () {
+        let $form = $("#setForm");
+        let player1Set = holdNes.player1Set;
+        let sets = "";
+        for (let key in player1Set) {
+            sets += ` <div class="layui-form-item">
+                                            <label class="layui-form-label" style="width: 148px">${key}</label>
+                                            <div class="layui-input-inline" style="width: 122px">
+                                                <input type="text" keySet="${key}" onkeydown="chaneThis(1,this);" name="title" value="${player1Set[key] + " " +romsData.keyMap[player1Set[key]]}" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                            </div>
+                                            </div>`
+        }
+        $form.html(sets);
+
+        $form = $("#setForm2");
+        let player2Set = holdNes.player2Set;
+        sets = "";
+        for (let key in player2Set) {
+            sets += ` <div class="layui-form-item">
+                                            <label class="layui-form-label" style="width: 148px">${key}</label>
+                                            <div class="layui-input-inline" style="width: 122px">
+                                                <input type="text" keySet="${key}" onkeydown="chaneThis(2,this);" name="title" value="${player2Set[key] + " " +romsData.keyMap[player2Set[key]]}" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                            </div>
+                                            </div>`
+        }
+        $form.html(sets);
+
+        $form = $("#setForm3");
+        let gamePad = gamePadApi.kesPad;
+        sets = "";
+        for (let key in gamePad) {
+            if(key){
+                sets += ` <div class="layui-form-item">
+                                            <label class="layui-form-label" style="width: 148px">${gamePad[key]}</label>
+                                            <div class="layui-input-inline" style="width: 122px">
+                                                <input type="text" keySet="${gamePad[key]}" onblur="blurThis()" onfocus="focusThis(this);" name="title" value="${key}" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                            </div>
+                                            </div>`
+            }
+        }
+        $form.html(sets);
+
+
+        layui.form.render()
     }
     , initContentMenu: function () {
         window.f12Flag = true;
@@ -259,7 +261,7 @@ var indexObj = {
                 } else if (obj.id === 'nesFc') {
                     indexObj.setFc();
                 } else if (obj.id === 'setKeyBoard') {
-
+                    indexObj.initSetForm();
                 }
             }
             , ready: function (elemPanel, elem) {
@@ -312,12 +314,18 @@ window.chaneThis = function (player,that) {
 window.focusThis = function(that){
     let $this = $(that);
     let key = $this.attr('keySet')
-    gamePadApi.setGamePad(key,function (data) {
-        $this.val(data);
-        gamePadApi.saveKesPadSet();
-    })
+    window.canSet = true;
+    window.canSetValue = key;
+    window.setGamePadCall = function(key){
+        $this.val(key);
+    }
     event.stopPropagation();
     event.preventDefault();
+}
+window.blurThis = function(){
+    window.canSet = undefined;
+    window.canSetValue = undefined;
+    window.setGamePadCall = undefined;
 }
 
 $(function () {

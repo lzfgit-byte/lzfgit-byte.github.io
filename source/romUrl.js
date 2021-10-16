@@ -5,6 +5,7 @@ let romsData = {
         ['雪人兄弟', 'roms/1981/Snow Bros. (J).nes'],
         ['冒险岛4', 'roms/1981/maoxiandao.nes'],
         ['加纳战机', 'roms/1981/Gun-Nac.nes'],
+        ['三目童子', 'roms/1981/sanmotz.nes'],
         ['魂斗罗1(U)30S', 'roms/Contra/Contra1(U)30S.nes'],
         ['超级马里奥1 (W) Super Mario Bros. [!]', 'roms/rom1/(W) Super Mario Bros. [!].nes'],
         ['双截龙2 Double Dragon2', 'roms/Double Dragon/Double Dragon2.nes'],
