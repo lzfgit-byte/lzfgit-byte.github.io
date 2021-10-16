@@ -28,26 +28,26 @@
     </style>
     <script>
         window.f12Flag = false;
-        // window.document.addEventListener("keydown",function (event) {
-        //     if(event.code == "F12"){
-        //         // window.keyjson[event.keyCode] = event.code;
-        //         // return true;
-        //         event.preventDefault();
-        //         event.stopPropagation();
-        //         return false;
-        //     }
-        //     // window.keyjson[event.keyCode] = event.code;
-        //     // event.preventDefault();
-        //     // event.stopPropagation();
-        // })
-        // window.document.addEventListener("contextmenu",function (event) {
-        //     if(!f12Flag){
-        //         event.preventDefault();
-        //         event.stopPropagation();
-        //         return false;
-        //     }
-        //
-        // })
+        window.document.addEventListener("keydown",function (event) {
+            if(event.code == "F12"){
+                // window.keyjson[event.keyCode] = event.code;
+                // return true;
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+            // window.keyjson[event.keyCode] = event.code;
+            // event.preventDefault();
+            // event.stopPropagation();
+        })
+        window.document.addEventListener("contextmenu",function (event) {
+            if(!f12Flag){
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+
+        })
     </script>
 
 </head>
